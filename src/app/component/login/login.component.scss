@@ -1,0 +1,27 @@
+@import "src/app/shared/colors";
+@import "src/app/shared/classes";
+
+.login-card {
+
+  &__header {
+    background-color: $color-blue-1;
+    color: $color-white;
+    text-align: center;
+    font-size: 20px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    padding: 24px;
+  }
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}

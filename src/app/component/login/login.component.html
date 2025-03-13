@@ -1,0 +1,37 @@
+<mat-card class="login-card">
+  <mat-card-title
+    class="login-card__header"
+    mat-dialog-title>Login
+  </mat-card-title>
+  <form
+    [formGroup]="loginForm">
+    <mat-card-content
+      class="login-card__content"
+      mat-dialog-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <input
+          formControlName="username"
+          matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <input
+          [type]="hidePassword ? 'password' : 'text'"
+          formControlName="password"
+          matInput
+          placeholder="Password"
+          required>
+        <mat-icon
+          (click)="hidePassword = !hidePassword"
+          matSuffix>{{ hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </mat-form-field>
+      <mat-error *ngIf="invalidCredentials">You have entered an invalid username or password</mat-error>
+      <button
+        (click)="onLoginClick($event)"
+        [disabled]="!loginForm.valid"
+        mat-button>Login
+      </button>
+    </mat-card-content>
+  </form>
+</mat-card>
