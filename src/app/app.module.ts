@@ -17,6 +17,13 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
+import { VehiclesComponent } from './component/vehicles/vehicles.component';
+import { ManufacturersComponent } from './component/manufacturers/manufacturers.component';
+import { UsersComponent } from './component/users/users.component';
+import { StatisticsComponent } from './component/statistics/statistics.component';
+import { VehicleDetailsComponent } from './component/vehicle-details/vehicle-details.component';
+import { ProfileDetailsModalComponent } from './component/profile-details/profile-details-modal.component';
+import { RentalComponent } from './component/rental/rental.component';
 
 export const ANGULAR_MATERIAL_MODULES = [
   MatCardModule,
@@ -34,7 +41,14 @@ export const ANGULAR_MATERIAL_MODULES = [
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    VehiclesComponent,
+    ManufacturersComponent,
+    UsersComponent,
+    StatisticsComponent,
+    VehicleDetailsComponent,
+    ProfileDetailsModalComponent,
+    RentalComponent
   ],
   imports: [
     BrowserModule,
