@@ -1,0 +1,62 @@
+//avatar
+.avatar-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-wrapper img {
+  width: 40px;
+  height: 40px;
+}
+
+//upload button
+.upload-button {
+  text-align: center;
+  margin-top: 20px;
+}
+
+//upload file
+.file-label {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.file-label:hover {
+  background-color: #0056b3;
+}
+
+.file-input {
+  display: none;
+}
+
+//button wrapper, save or discard
+
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  gap: 16px;
+}
+
+.button-discard {
+  background-color: $color-red-1;
+  color: $color-white;
+
+  &:hover {
+    background-color: $color-red-2;
+  }
+}
+
+.button-save {
+  background-color: $color-blue-1;
+  color: $color-white;
+
+  &:hover {
+    background-color: $color-blue-3;
+  }
+}

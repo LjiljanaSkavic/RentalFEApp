@@ -1,1 +1,87 @@
-<p>profile-details works!</p>
+<mat-card class="profile-page-card">
+  <mat-card-title
+    class="profile-page-card__header"
+    mat-dialog-title>Profile details
+  </mat-card-title>
+  <mat-card-content class="profile-page-card__content">
+    <form
+      [formGroup]="profileForm"
+      class="profile-form">
+      <div class="profile-form profile-form--row">
+        <div
+          *ngIf="fileUrl"
+          class="avatar-wrapper">
+          <img
+            [src]="fileUrl"
+            alt="File"
+            class="avatar-image">
+        </div>
+        <div
+          class="upload-button">
+          <label
+            class="file-label"
+            for="fileInput">
+            <span>Upload new picture</span>
+            <input
+              (change)="onFileSelected($event)"
+              class="file-input"
+              id="fileInput"
+              type="file">
+          </label>
+        </div>
+      </div>
+      <div class="profile-form profile-form--row">
+        <mat-form-field
+          class="form-field">
+          <mat-label>Username</mat-label>
+          <input
+            [disabled]="true"
+            formControlName="username"
+            matInput
+            readonly>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>First name</mat-label>
+          <input
+            formControlName="firstName"
+            matInput>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>Last name</mat-label>
+          <input
+            formControlName="lastName"
+            matInput>
+        </mat-form-field>
+      </div>
+      <div class="profile-form profile-form--row">
+        <mat-form-field class="form-field">
+          <mat-label>Email</mat-label>
+          <input
+            formControlName="email"
+            matInput
+            type="email">
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>Phone</mat-label>
+          <input
+            formControlName="phone"
+            matInput>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card-content>
+  <div
+    class="button-wrapper">
+    <button
+      (click)="onDiscardProfileChanges()"
+      class="button-discard"
+      mat-button>Discard
+    </button>
+    <button
+      (click)="onSaveProfileChanges()"
+      [disabled]="profileForm.invalid"
+      class="button-save"
+      mat-button>Save
+    </button>
+  </div>
+</mat-card>

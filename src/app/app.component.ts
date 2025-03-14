@@ -1,10 +1,11 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { LoginComponent } from "./component/login/login.component";
 import { MatDialog } from "@angular/material/dialog";
 import { animate, AUTO_STYLE, state, style, transition, trigger } from "@angular/animations";
 import { UserStoreService } from "./services/user-store.service";
 import { AppUser } from "./model/AppUser";
 import { Subscription } from "rxjs";
+import { ProfileDetailsModalComponent } from "./component/profile-details/profile-details-modal.component";
 
 export const DEFAULT_ANIMATION_DURATION = 100;
 
@@ -24,11 +25,22 @@ export const DEFAULT_ANIMATION_DURATION = 100;
 export class AppComponent implements OnInit, OnDestroy {
   user: AppUser | null = null;
   subscription = new Subscription();
-  collapsed = false;
+  collapsed = true;
 
   constructor(private _userStoreService: UserStoreService,
               private _changeDetectorRef: ChangeDetectorRef,
+              private _elRef: ElementRef,
               public dialog: MatDialog) {
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event): void {
+    const clickedToggleProfile = this._elRef.nativeElement.querySelector('.profile-details').contains(event.target);
+    const clickedInsideProfileCard = this._elRef.nativeElement.querySelector('.quick-profile-view-card').contains(event.target);
+
+    if (!clickedToggleProfile && !clickedInsideProfileCard && !this.collapsed) {
+      this.collapsed = true;
+    }
   }
 
   ngOnInit(): void {
@@ -68,8 +80,15 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   onProfileDetailsClick(): void {
-
+    this.collapsed = true;
+    this.dialog.open(ProfileDetailsModalComponent, {
+        hasBackdrop: true,
+        backdropClass: 'rental-app-backdrop'
+      }
+    ).afterClosed().subscribe(() => {
+    });
   }
+
 
   onChangePasswordClick(): void {
 
@@ -84,7 +103,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   onToggleAccountMenuClick(): void {
-
+    this.collapsed = !this.collapsed;
   }
 
 

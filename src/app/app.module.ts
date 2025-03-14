@@ -22,8 +22,9 @@ import { ManufacturersComponent } from './component/manufacturers/manufacturers.
 import { UsersComponent } from './component/users/users.component';
 import { StatisticsComponent } from './component/statistics/statistics.component';
 import { VehicleDetailsComponent } from './component/vehicle-details/vehicle-details.component';
-import { ProfileDetailsModalComponent } from './component/profile-details/profile-details-modal.component';
 import { RentalComponent } from './component/rental/rental.component';
+import { ProfileDetailsModalComponent } from "./component/profile-details/profile-details-modal.component";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 export const ANGULAR_MATERIAL_MODULES = [
   MatCardModule,
@@ -36,6 +37,7 @@ export const ANGULAR_MATERIAL_MODULES = [
   MatToolbarModule,
   MatSidenavModule,
   MatListModule,
+  MatSnackBarModule
 ]
 
 @NgModule({

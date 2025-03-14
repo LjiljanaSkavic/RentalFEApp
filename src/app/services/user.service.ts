@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { AppUser } from "../model/AppUser";
 import { Observable } from "rxjs";
+import { AppUserRequest } from "../model/AppUserRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,11 @@ import { Observable } from "rxjs";
 export class UserService {
   loggedUser: AppUser | null = null;
   baseUrl = "http://localhost:9000/user";
+
   constructor(private _httpClient: HttpClient) {
   }
 
-  isLoggedIn(): boolean{
+  isLoggedIn(): boolean {
     return this.loggedUser !== null;
   }
 
@@ -30,4 +32,10 @@ export class UserService {
       })
     })
   }
+
+  editUser(user: AppUserRequest): Observable<AppUser> {
+    const editUserUrl = `${this.baseUrl}/${user.id}`;
+    return this._httpClient.put<AppUser>(editUserUrl, user);
+  }
+
 }

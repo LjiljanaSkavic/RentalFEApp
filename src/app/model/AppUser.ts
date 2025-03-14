@@ -1,3 +1,5 @@
+import { RentalAppFile } from "./RentalAppFile";
+
 export type UserRole = 'Manager' | 'Administrator' | 'Operator';
 
 export interface AppUser {
@@ -8,5 +10,5 @@ export interface AppUser {
   email: string;
   phone: string;
   role: UserRole;
-  profilePictureId: number;
+  image: RentalAppFile;
 }
