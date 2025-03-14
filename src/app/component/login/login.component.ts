@@ -34,32 +34,31 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.loginForm.get('password')?.valueChanges.subscribe(value => this.invalidCredentials = false)
     );
   }
+
   buildForm(): void {
     this.loginForm = this._formBuilder.group({
       username: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required])
     });
   }
+
   getPasswordHash(password: string): string {
     return sha512.sha512(password);
   }
+
   onLoginClick(event: MouseEvent): void {
       const username = this.loginForm.get('username')!.value;
       const password = this.getPasswordHash(this.loginForm.get('password')!.value);
       this.subscriptions.add(
         this._userService.findUserByUsernameAndPassword(username, password).subscribe(
           (user) => {
-            //TODO: Add some actions later
-            console.log(user)
-            this._dialogRef.close();
+            this._dialogRef.close(user);
           },
-          (error) => {
+          () => {
+            //TODO: Handle more specific errors
             this.invalidCredentials = true;
-          }));
+          }))
   }
-
-  // onSignUpClick($event: MouseEvent): void {
-  // }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
