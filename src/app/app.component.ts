@@ -95,7 +95,12 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   onLogOutClick(): void {
-
+    if (this.user !== null) {
+      this.collapsed = true;
+      this._userStoreService.setUserAsLoggedOut();
+      this._userStoreService.isLoggedIn$.next(false);
+      window.location.reload();
+    }
   }
 
   onRentalAppClick(): void {
