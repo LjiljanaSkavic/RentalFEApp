@@ -1,12 +1,13 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { LoginComponent } from "./component/login/login.component";
-import { UserService } from "./services/user.service";
 import { MatDialog } from "@angular/material/dialog";
 import { animate, AUTO_STYLE, state, style, transition, trigger } from "@angular/animations";
 import { UserStoreService } from "./services/user-store.service";
 import { AppUser } from "./model/AppUser";
 import { Subscription } from "rxjs";
+
 export const DEFAULT_ANIMATION_DURATION = 100;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,39 +21,42 @@ export const DEFAULT_ANIMATION_DURATION = 100;
     ])
   ]
 })
-export class AppComponent implements OnInit, OnDestroy{
+export class AppComponent implements OnInit, OnDestroy {
   user: AppUser | null = null;
-  isLoggedIn = false;
   subscription = new Subscription();
+  collapsed = false;
+
   constructor(private _userStoreService: UserStoreService,
-              public dialog: MatDialog,
-              private _changeDetectorRef: ChangeDetectorRef) {
+              private _changeDetectorRef: ChangeDetectorRef,
+              public dialog: MatDialog) {
   }
+
   ngOnInit(): void {
     this.user = this._userStoreService.getLoggedInUser();
     if (this.user !== null) {
       this._userStoreService.setUserAsLoggedIn(this.user);
     } else {
-     this.openLogin();
+      this.openLogin();
     }
 
     this.subscribeToUserChanges();
   }
 
-  openLogin(): void{
+  openLogin(): void {
     const dialogRef = this.dialog.open(LoginComponent,
       {
         disableClose: true,
         hasBackdrop: true,
-        backdropClass: 'rental-app-backdrop'});
+        backdropClass: 'rental-app-backdrop'
+      });
     dialogRef.afterClosed().subscribe((user) => {
       this._userStoreService.setUserAsLoggedIn(user);
       this._userStoreService.isLoggedIn$.next(true);
     });
   }
 
-  subscribeToUserChanges(): void{
-   this.subscription.add(this._userStoreService.isLoggedIn$.subscribe(res => {
+  subscribeToUserChanges(): void {
+    this.subscription.add(this._userStoreService.isLoggedIn$.subscribe(res => {
       if (res) {
         this.user = this._userStoreService.getLoggedInUser();
         this._changeDetectorRef.detectChanges();
@@ -62,6 +66,27 @@ export class AppComponent implements OnInit, OnDestroy{
       }
     }));
   }
+
+  onProfileDetailsClick(): void {
+
+  }
+
+  onChangePasswordClick(): void {
+
+  }
+
+  onLogOutClick(): void {
+
+  }
+
+  onRentalAppClick(): void {
+
+  }
+
+  onToggleAccountMenuClick(): void {
+
+  }
+
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

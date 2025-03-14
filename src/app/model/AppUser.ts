@@ -1,3 +1,5 @@
+export type UserRole = 'Manager' | 'Administrator' | 'Operator';
+
 export interface AppUser {
   id: number;
   username: string;
@@ -5,6 +7,6 @@ export interface AppUser {
   lastName: string;
   email: string;
   phone: string;
-  role: string;
+  role: UserRole;
   profilePictureId: number;
 }

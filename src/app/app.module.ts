@@ -8,11 +8,16 @@ import { MatCardModule } from "@angular/material/card";
 import { MatInputModule } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatIconModule } from "@angular/material/icon";
-import { MatFormField, MatFormFieldModule } from "@angular/material/form-field";
+import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatListModule } from "@angular/material/list";
+
 export const ANGULAR_MATERIAL_MODULES = [
   MatCardModule,
   MatInputModule,
@@ -20,7 +25,12 @@ export const ANGULAR_MATERIAL_MODULES = [
   MatFormFieldModule,
   MatButtonModule,
   MatDialogModule,
+  MatTooltipModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  MatListModule,
 ]
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,4 +48,5 @@ export const ANGULAR_MATERIAL_MODULES = [
   providers: [HttpClient],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

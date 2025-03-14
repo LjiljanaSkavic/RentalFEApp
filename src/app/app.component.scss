@@ -1,0 +1,80 @@
+@import "src/app/shared/colors";
+
+body {
+  overflow: hidden;
+}
+
+.toolbar-container {
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 150;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 66, 121, 1) 29%, rgba(0, 212, 255, 1) 100%);
+}
+
+.toolbar-container-left {
+  display: flex;
+  align-items: center;
+  color: $color-blue-3;
+}
+
+.toolbar-container-right {
+  display: flex;
+  align-items: center;
+}
+
+.rental-app-label {
+  cursor: pointer;
+}
+
+.container {
+  height: 100vh;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  background-color: $color-gray-1;
+}
+
+.sidenav {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  background-color: $color-blue-4;
+  color: $color-blue-3;
+  padding: 16px;
+}
+
+.mat-toolbar {
+  background-color: $color-blue-3;
+}
+
+.mat-list-item {
+  color: $color-blue-3;
+  background-color: $color-blue-4;
+  width: 100%;
+  padding: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.mat-list-item:hover {
+  background-color: $color-blue-7;
+}
+
+.mat-list-item.active {
+  background-color: $color-blue-1;
+  color: $color-gray-1;
+}
+
+.quick-profile-view-card {
+  z-index: 20;
+  height: 120px;
+  width: 240px;
+  background-color: $color-blue-6;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  position: fixed;
+  right: 0;
+}
