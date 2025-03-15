@@ -6,6 +6,7 @@ import { UserStoreService } from "./services/user-store.service";
 import { AppUser } from "./model/AppUser";
 import { Subscription } from "rxjs";
 import { ProfileDetailsModalComponent } from "./component/profile-details/profile-details-modal.component";
+import { ManagePasswordModalComponent } from "./component/manage-password-modal/manage-password-modal.component";
 
 export const DEFAULT_ANIMATION_DURATION = 100;
 
@@ -89,9 +90,15 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-
   onChangePasswordClick(): void {
-
+    this.collapsed = true;
+    this.dialog.open(ManagePasswordModalComponent, {
+        hasBackdrop: true,
+        backdropClass: 'rental-app-backdrop'
+      }
+    ).afterClosed().subscribe(
+      () => {
+      });
   }
 
   onLogOutClick(): void {

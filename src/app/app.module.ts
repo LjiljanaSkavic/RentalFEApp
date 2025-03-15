@@ -25,6 +25,7 @@ import { VehicleDetailsComponent } from './component/vehicle-details/vehicle-det
 import { RentalComponent } from './component/rental/rental.component';
 import { ProfileDetailsModalComponent } from "./component/profile-details/profile-details-modal.component";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { ManagePasswordModalComponent } from './component/manage-password-modal/manage-password-modal.component';
 
 export const ANGULAR_MATERIAL_MODULES = [
   MatCardModule,
@@ -50,7 +51,8 @@ export const ANGULAR_MATERIAL_MODULES = [
     StatisticsComponent,
     VehicleDetailsComponent,
     ProfileDetailsModalComponent,
-    RentalComponent
+    RentalComponent,
+    ManagePasswordModalComponent
   ],
   imports: [
     BrowserModule,

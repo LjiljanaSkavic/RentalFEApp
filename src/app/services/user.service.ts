@@ -33,6 +33,15 @@ export class UserService {
     })
   }
 
+  changePassword(userId: number, currentPassword: string, newPassword: string) {
+    const changePasswordUrl = `${this.baseUrl}/change-password/${userId}`;
+    const changePasswordData = {
+      currentPassword: currentPassword,
+      newPassword: newPassword
+    }
+    return this._httpClient.post(changePasswordUrl, changePasswordData)
+  }
+
   editUser(user: AppUserRequest): Observable<AppUser> {
     const editUserUrl = `${this.baseUrl}/${user.id}`;
     return this._httpClient.put<AppUser>(editUserUrl, user);
