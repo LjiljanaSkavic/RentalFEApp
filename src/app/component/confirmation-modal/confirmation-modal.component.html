@@ -1,0 +1,25 @@
+<div class="modal-wrapper">
+    <h1
+        class="modal-header"
+        mat-dialog-title>{{ dialogData.title }}</h1>
+    <div
+        class="modal-content"
+        mat-dialog-content>
+        {{ dialogData.text }}
+    </div>
+    <div
+        class="button-wrapper"
+        mat-dialog-actions>
+        <button
+            [mat-dialog-close]="null"
+            class="button-discard"
+            mat-button>No
+        </button>
+        <button
+            [mat-dialog-close]="DIALOG_RESPONSE.YES"
+            class="button-save"
+            mat-button>Yes
+        </button>
+    </div>
+</div>
+

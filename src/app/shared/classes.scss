@@ -60,3 +60,40 @@
     background-color: $color-blue-3;
   }
 }
+
+//button primary
+.button-primary {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+
+  mat-icon {
+    color: $color-blue-1;
+  }
+}
+
+//button danger
+.button-danger {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  mat-icon {
+    color: $color-red-1;
+  }
+}
+
+//paginator
+.mat-paginator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 16px;
+  background-color: $color-blue-1;
+  color: white;
+  border-radius: 8px;
+}

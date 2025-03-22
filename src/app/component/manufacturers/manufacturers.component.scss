@@ -1,0 +1,15 @@
+@import "src/app/shared/colors";
+@import "src/app/shared/classes";
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 16px;
+  //min-height: 65vh;
+}
+
+.header-container {
+  display: flex;
+  justify-content: end;
+}

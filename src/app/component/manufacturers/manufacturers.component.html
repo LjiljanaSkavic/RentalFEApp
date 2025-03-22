@@ -1,1 +1,79 @@
-<p>manufacturers works!</p>
+<div class="page-container">
+  <div class="header-container">
+    <button
+      (click)="onAddNewManufacturerClick()"
+      [matTooltip]="'Add manufacturer'"
+      class="button-primary"
+      mat-button
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID</mat-header-cell>
+      <mat-cell *matCellDef="let manufacturer"> {{ manufacturer.id }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+      <mat-cell *matCellDef="let manufacturer"> {{ manufacturer.name }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="country">
+      <mat-header-cell *matHeaderCellDef> Country</mat-header-cell>
+      <mat-cell *matCellDef="let manufacturer"> {{ manufacturer.country }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef> Address</mat-header-cell>
+      <mat-cell *matCellDef="let manufacturer"> {{ manufacturer.address }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> Email</mat-header-cell>
+      <mat-cell *matCellDef="let manufacturer"> {{ manufacturer.email }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <mat-header-cell *matHeaderCellDef> Phone</mat-header-cell>
+      <mat-cell *matCellDef="let manufacturer"> {{ manufacturer.phone }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="fax">
+      <mat-header-cell *matHeaderCellDef> Fax</mat-header-cell>
+      <mat-cell *matCellDef="let manufacturer"> {{ manufacturer.fax }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef> Edit</mat-header-cell>
+      <mat-cell *matCellDef="let manufacturer; let index = index">
+        <button
+          (click)="onEditClick(manufacturer)"
+          class="button-primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef> Delete</mat-header-cell>
+      <mat-cell *matCellDef="let manufacturer; let index = index">
+        <button
+          (click)="onDeleteClick(manufacturer)"
+          class="button-danger">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+
+<mat-paginator
+  (page)="onPageChange($event)"
+  [length]="totalManufacturers"
+  [pageSize]="pageSize"
+  class="mat-paginator"></mat-paginator>

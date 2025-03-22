@@ -26,6 +26,13 @@ import { RentalComponent } from './component/rental/rental.component';
 import { ProfileDetailsModalComponent } from "./component/profile-details/profile-details-modal.component";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { ManagePasswordModalComponent } from './component/manage-password-modal/manage-password-modal.component';
+import { MatPaginatorModule } from "@angular/material/paginator";
+import {
+  ManufacturerModalComponent
+} from './component/manufacturers/manufacturer-preview-card/manufacturer-modal.component';
+import { MatTableModule } from "@angular/material/table";
+import { MatSortModule } from "@angular/material/sort";
+import { ConfirmationModalComponent } from "./component/confirmation-modal/confirmation-modal.component";
 
 export const ANGULAR_MATERIAL_MODULES = [
   MatCardModule,
@@ -52,7 +59,9 @@ export const ANGULAR_MATERIAL_MODULES = [
     VehicleDetailsComponent,
     ProfileDetailsModalComponent,
     RentalComponent,
-    ManagePasswordModalComponent
+    ManagePasswordModalComponent,
+    ManufacturerModalComponent,
+    ConfirmationModalComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +71,9 @@ export const ANGULAR_MATERIAL_MODULES = [
     ReactiveFormsModule,
     HttpClientModule,
     ANGULAR_MATERIAL_MODULES,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]

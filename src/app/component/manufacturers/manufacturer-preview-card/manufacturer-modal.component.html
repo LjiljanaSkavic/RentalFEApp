@@ -1,0 +1,105 @@
+<div class="manufacturer-container">
+  <div
+    class="manufacturer-container__header"
+    mat-dialog-title>
+    {{ this.isEditMode ? 'Edit Manufacturer' : 'Add Manufacturer' }}
+  </div>
+
+  <form
+    [formGroup]="manufacturerForm"
+    class="form-wrapper">
+    <div class="form-wrapper__group">
+      <mat-form-field class="form-field">
+        <mat-label>Name</mat-label>
+        <input
+          formControlName="name"
+          matInput
+          placeholder="Manufacturer name">
+        <mat-error *ngIf="manufacturerForm.get('name')?.hasError('required')">
+          Name is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Country</mat-label>
+        <input
+          formControlName="country"
+          matInput
+          placeholder="Enter country">
+        <mat-error *ngIf="manufacturerForm.get('country')?.hasError('required')">
+          Country is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-wrapper__group">
+      <mat-form-field class="form-field">
+        <mat-label>Address</mat-label>
+        <input
+          formControlName="address"
+          matInput
+          placeholder="Enter address">
+        <mat-error *ngIf="manufacturerForm.get('address')?.hasError('required')">
+          Address is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Email</mat-label>
+        <input
+          formControlName="email"
+          matInput
+          placeholder="Enter email address">
+        <mat-error *ngIf="manufacturerForm.get('email')?.hasError('required')">
+          Email is required.
+        </mat-error>
+        <mat-error *ngIf="manufacturerForm.get('email')?.hasError('email')">
+          Please enter a valid email address.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-wrapper__group">
+      <mat-form-field class="form-field">
+        <mat-label>Phone</mat-label>
+        <input
+          formControlName="phone"
+          matInput
+          placeholder="Enter phone number">
+        <mat-error *ngIf="manufacturerForm.get('phone')?.hasError('required')">
+          Phone number is required.
+        </mat-error>
+        <mat-error *ngIf="manufacturerForm.get('phone')?.hasError('pattern')">
+          Please enter a valid phone number.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Fax</mat-label>
+        <input
+          formControlName="fax"
+          matInput
+          placeholder="Enter fax number">
+        <mat-error *ngIf="manufacturerForm.get('fax')?.hasError('pattern')">
+          Please enter a valid fax number.
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+
+  <div
+    class="button-wrapper"
+    mat-dialog-actions>
+    <button
+      [mat-dialog-close]="null"
+      class="button-discard"
+      mat-button>Discard
+    </button>
+    <button
+      (click)="onDialogClose()"
+      class="button-save"
+      mat-button>
+      Save
+    </button>
+  </div>
+</div>
