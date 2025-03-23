@@ -21,18 +21,18 @@ import { VehiclesComponent } from './component/vehicles/vehicles.component';
 import { ManufacturersComponent } from './component/manufacturers/manufacturers.component';
 import { UsersComponent } from './component/users/users.component';
 import { StatisticsComponent } from './component/statistics/statistics.component';
-import { VehicleDetailsComponent } from './component/vehicle-details/vehicle-details.component';
+import { VehicleDetailsComponent } from './component/vehicles/vehicle-details/vehicle-details.component';
 import { RentalComponent } from './component/rental/rental.component';
 import { ProfileDetailsModalComponent } from "./component/profile-details/profile-details-modal.component";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { ManagePasswordModalComponent } from './component/manage-password-modal/manage-password-modal.component';
 import { MatPaginatorModule } from "@angular/material/paginator";
-import {
-  ManufacturerModalComponent
-} from './component/manufacturers/manufacturer-preview-card/manufacturer-modal.component';
+import { ManufacturerModalComponent } from './component/manufacturers/manufacturer-modal/manufacturer-modal.component';
 import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
 import { ConfirmationModalComponent } from "./component/confirmation-modal/confirmation-modal.component";
+import { MatSelectModule } from "@angular/material/select";
+import { VehicleModalComponent } from './component/vehicles/vehicle-modal/vehicle-modal.component';
 
 export const ANGULAR_MATERIAL_MODULES = [
   MatCardModule,
@@ -61,7 +61,8 @@ export const ANGULAR_MATERIAL_MODULES = [
     RentalComponent,
     ManagePasswordModalComponent,
     ManufacturerModalComponent,
-    ConfirmationModalComponent
+    ConfirmationModalComponent,
+    VehicleModalComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +75,7 @@ export const ANGULAR_MATERIAL_MODULES = [
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
+    MatSelectModule,
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]

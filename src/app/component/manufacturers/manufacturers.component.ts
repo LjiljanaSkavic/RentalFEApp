@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { EMPTY, Subscription, switchMap } from "rxjs";
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { MatTableDataSource } from '@angular/material/table'; // Import MatTableDataSource
@@ -6,7 +6,7 @@ import { Manufacturer } from "../../model/Manufacturer";
 import { ManufacturersService } from "../../services/manufacturers.service";
 import { ConfirmationModalComponent } from "../confirmation-modal/confirmation-modal.component";
 import { MatDialog } from "@angular/material/dialog";
-import { ManufacturerModalComponent } from "./manufacturer-preview-card/manufacturer-modal.component";
+import { ManufacturerModalComponent } from "./manufacturer-modal/manufacturer-modal.component";
 
 @Component({
   selector: 'app-manufacturers',
@@ -27,7 +27,6 @@ export class ManufacturersComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator = {} as MatPaginator;
 
   constructor(private _manufacturersService: ManufacturersService,
-              private _cdRef: ChangeDetectorRef,
               public dialog: MatDialog) {
   }
 

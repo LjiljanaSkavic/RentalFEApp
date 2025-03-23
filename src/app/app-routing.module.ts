@@ -4,7 +4,7 @@ import { VehiclesComponent } from "./component/vehicles/vehicles.component";
 import { ManufacturersComponent } from "./component/manufacturers/manufacturers.component";
 import { UsersComponent } from "./component/users/users.component";
 import { StatisticsComponent } from "./component/statistics/statistics.component";
-import { VehicleDetailsComponent } from "./component/vehicle-details/vehicle-details.component";
+import { VehicleDetailsComponent } from "./component/vehicles/vehicle-details/vehicle-details.component";
 import { ProfileDetailsModalComponent } from "./component/profile-details/profile-details-modal.component";
 import { RentalComponent } from "./component/rental/rental.component";
 

@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { Vehicle } from "../../../model/Vehicle";
+
+export interface VehicleModalData {
+  vehicle: Vehicle;
+}
 
 @Component({
   selector: 'app-vehicle-details',
@@ -6,5 +11,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./vehicle-details.component.scss']
 })
 export class VehicleDetailsComponent {
-
 }
