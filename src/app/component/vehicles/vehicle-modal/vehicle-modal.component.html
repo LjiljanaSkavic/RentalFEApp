@@ -52,23 +52,7 @@
         <mat-error *ngIf="vehicleForm.get('status')?.hasError('required')">Status is required.</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="form-field">
-        <mat-label>Vehicle Type</mat-label>
-        <mat-select
-          (selectionChange)="onVehicleTypeChange($event)"
-          formControlName="vehicleType">
-          <mat-option value="Car">Car</mat-option>
-          <mat-option value="ElectricBike">Electric Bike</mat-option>
-          <mat-option value="ElectricScooter">Electric Scooter</mat-option>
-        </mat-select>
-        <mat-error *ngIf="vehicleForm.get('vehicleType')?.hasError('required')">Vehicle Type is required.</mat-error>
-      </mat-form-field>
-    </div>
-
-    <!-- Dynamic Fields -->
-    <div class="form-wrapper__group">
-      <!-- Dynamic Fields for Car -->
-      <ng-container *ngIf="vehicleForm.get('vehicleType')?.value === 'Car'">
+      <ng-container *ngIf="data.vehicleType === 'CAR'">
         <mat-form-field class="form-field">
           <mat-label>Acquisition Date</mat-label>
           <input
@@ -89,8 +73,7 @@
         </mat-form-field>
       </ng-container>
 
-      <!-- Dynamic Fields for Electric Bike -->
-      <ng-container *ngIf="vehicleForm.get('vehicleType')?.value === 'ElectricBike'">
+      <ng-container *ngIf="data.vehicleType === 'E_BIKE'">
         <mat-form-field class="form-field">
           <mat-label>Range Per Charge (km)</mat-label>
           <input
@@ -102,8 +85,7 @@
         </mat-form-field>
       </ng-container>
 
-      <!-- Dynamic Fields for Electric Scooter -->
-      <ng-container *ngIf="vehicleForm.get('vehicleType')?.value === 'ElectricScooter'">
+      <ng-container *ngIf="data.vehicleType === 'E_SCOOTER'">
         <mat-form-field class="form-field">
           <mat-label>Max Speed (km/h)</mat-label>
           <input
@@ -114,9 +96,7 @@
         </mat-form-field>
       </ng-container>
     </div>
-
   </form>
-
   <div
     class="button-wrapper"
     mat-dialog-actions>

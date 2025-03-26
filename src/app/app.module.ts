@@ -33,6 +33,7 @@ import { MatSortModule } from "@angular/material/sort";
 import { ConfirmationModalComponent } from "./component/confirmation-modal/confirmation-modal.component";
 import { MatSelectModule } from "@angular/material/select";
 import { VehicleModalComponent } from './component/vehicles/vehicle-modal/vehicle-modal.component';
+import { VehicleTypePipe } from "./pipes/vehicle-category.pipe";
 
 export const ANGULAR_MATERIAL_MODULES = [
   MatCardModule,
@@ -62,7 +63,8 @@ export const ANGULAR_MATERIAL_MODULES = [
     ManagePasswordModalComponent,
     ManufacturerModalComponent,
     ConfirmationModalComponent,
-    VehicleModalComponent
+    VehicleModalComponent,
+    VehicleTypePipe
   ],
   imports: [
     BrowserModule,

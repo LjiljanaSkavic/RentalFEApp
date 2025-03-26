@@ -2,11 +2,12 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
 import { VehicleService } from "../../services/vehicle.service";
 import { EMPTY, Subscription, switchMap } from "rxjs";
-import { Vehicle } from "../../model/Vehicle";
+import { Car, ElectricBike, ElectricScooter, Vehicle } from "../../model/Vehicle";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { ConfirmationModalComponent } from "../confirmation-modal/confirmation-modal.component";
 import { VehicleModalComponent } from "./vehicle-modal/vehicle-modal.component";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-vehicles',
@@ -22,11 +23,12 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   subscriptions = new Subscription();
   selectedCategory = '';
   dataSource = new MatTableDataSource<Vehicle>(this.vehicles);
-  categories = ['All', 'Car', 'Electric Bike', 'Electric Scooter'];
+  categories = ['CAR', 'E_BIKE', 'E_SCOOTER'];
   displayedColumns: string[] = ['id', 'vehicleCode', 'purchasePrice', 'model', 'status', 'edit', 'delete'];
   @ViewChild(MatPaginator) paginator: MatPaginator = {} as MatPaginator;
 
   constructor(private _vehicleService: VehicleService,
+              private _router: Router,
               public dialog: MatDialog) {
   }
 
@@ -46,7 +48,24 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   }
 
   onAddNewVehicleClick(): void {
+    let newVehicle;
+    if (this.selectedCategory === 'CAR') {
+      newVehicle = {} as Car;
+    }
+
+    if (this.selectedCategory === 'E_BIKE') {
+      newVehicle = {} as ElectricBike;
+    }
+
+    if (this.selectedCategory === 'E_SCOOTER') {
+      newVehicle = {} as ElectricScooter;
+    }
+
     this.dialog.open(VehicleModalComponent, {
+      data: {
+        vehicle: newVehicle,
+        vehicleType: this.selectedCategory
+      },
       hasBackdrop: true,
       backdropClass: 'rental-app-backdrop'
     }).afterClosed().subscribe(result => {
@@ -59,21 +78,10 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   }
 
   onEditClick(vehicle: any): void {
-    if (!vehicle.vehicleType) {
-      if (vehicle.acquisitionDate && vehicle.description) {
-        vehicle.vehicleType = 'Car';
-      } else if (vehicle.rangePerCharge) {
-        vehicle.vehicleType = 'ElectricBike';
-      } else if (vehicle.maxSpeed) {
-        vehicle.vehicleType = 'ElectricScooter';
-      }
-    }
-
-    console.log(vehicle)
-
     this.dialog.open(VehicleModalComponent, {
       data: {
-        vehicle: vehicle
+        vehicle: vehicle,
+        vehicleType: this.selectedCategory
       },
       hasBackdrop: true,
       backdropClass: 'rental-app-backdrop'
@@ -114,6 +122,10 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   onCategoryChange(category: any): void {
     this.selectedCategory = category;
     this.loadVehicles();
+  }
+
+  onRowClick(vehicle: Vehicle): void {
+    this._router.navigateByUrl(`vehicles/${vehicle.id}`).catch(err => console.log(err));
   }
 
 

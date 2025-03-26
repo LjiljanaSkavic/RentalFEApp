@@ -4,7 +4,6 @@ export interface Vehicle {
   purchasePrice: number;
   model: string;
   status: VehicleStatus;
-  vehicleType?: VehicleType;
 }
 
 export type VehicleType = 'Car' | 'ElectricBike' | 'ElectricScooter';
