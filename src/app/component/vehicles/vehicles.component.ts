@@ -40,7 +40,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   loadVehicles(): void {
     this.isLoading = true;
     this.subscriptions.add(this._vehicleService.getVehicles(this.pageIndex, this.pageSize, this.selectedCategory).subscribe(res => {
-      this.vehicles = res.vehicles;
+      this.vehicles = res.data;
       this.totalVehicles = res.totalElements;
       this.dataSource.data = this.vehicles;
       this.isLoading = false;
