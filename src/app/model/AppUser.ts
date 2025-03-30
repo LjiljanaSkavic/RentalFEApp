@@ -10,5 +10,5 @@ export interface AppUser {
   email: string;
   phone: string;
   role: UserRole;
-  image: RentalAppFile;
+  profilePicture: RentalAppFile;
 }

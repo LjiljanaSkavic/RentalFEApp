@@ -1,12 +1,20 @@
+import { RentalAppFile } from "./RentalAppFile";
+
 export interface Vehicle {
   id: number;
   vehicleCode: string;
   purchasePrice: number;
   model: string;
   status: VehicleStatus;
+  manufacturerId: number;
+  image: RentalAppFile;
 }
 
-export type VehicleType = 'Car' | 'ElectricBike' | 'ElectricScooter';
+export enum VehicleCategory {
+  CAR = 'CAR',
+  E_BIKE = 'E_BIKE',
+  E_SCOOTER = 'E_SCOOTER',
+}
 
 export enum VehicleStatus {
   RENTED = 'Rented',

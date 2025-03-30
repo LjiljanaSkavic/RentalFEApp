@@ -37,7 +37,7 @@ export class ManufacturersComponent implements OnInit, OnDestroy {
   loadManufacturers(): void {
     this.isLoading = true;
     this.subscriptions.add(this._manufacturersService.getManufacturers(this.pageIndex, this.pageSize).subscribe(res => {
-      this.manufacturers = res.manufacturers;
+      this.manufacturers = res.data;
       this.totalManufacturers = res.totalElements;
       this.dataSource.data = this.manufacturers;
       this.isLoading = false;

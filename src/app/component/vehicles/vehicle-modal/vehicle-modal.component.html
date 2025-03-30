@@ -1,4 +1,4 @@
-<div class="vehicle-container">
+<div class="c">
   <div
     class="vehicle-container__header"
     mat-dialog-title>
@@ -8,6 +8,29 @@
   <form
     [formGroup]="vehicleForm"
     class="form-wrapper">
+    <div class="form-wrapper__group">
+      <div
+        *ngIf="fileUrl"
+        class="avatar-wrapper">
+        <img
+          [src]="fileUrl"
+          alt="File"
+          class="avatar-image">
+      </div>
+      <div
+        class="upload-button">
+        <label
+          class="file-label"
+          for="fileInput">
+          <span>Upload new picture</span>
+          <input
+            (change)="onFileSelected($event)"
+            class="file-input"
+            id="fileInput"
+            type="file">
+        </label>
+      </div>
+    </div>
     <div class="form-wrapper__group">
       <mat-form-field class="form-field">
         <mat-label>Vehicle Code</mat-label>
@@ -50,6 +73,18 @@
           <mat-option value="Broken">Broken</mat-option>
         </mat-select>
         <mat-error *ngIf="vehicleForm.get('status')?.hasError('required')">Status is required.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Manufacturer</mat-label>
+        <mat-select formControlName="manufacturerId">
+          <mat-option
+            *ngFor="let manufacturer of manufactures"
+            [value]="manufacturer.id">
+            {{ manufacturer.name }} ({{ manufacturer.country }})
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="vehicleForm.get('manufacturerId')?.hasError('required')">Manufacturer is required.</mat-error>
       </mat-form-field>
 
       <ng-container *ngIf="data.vehicleType === 'CAR'">

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { ManufacturerSearchResult } from "../model/ManufacturerSearchResult";
 import { Manufacturer, ManufacturerRequest } from "../model/Manufacturer";
+import { SearchResult } from "../model/SearchResult";
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +13,12 @@ export class ManufacturersService {
   constructor(private _httpClient: HttpClient) {
   }
 
-  getManufacturers(page: number = 0, size: number = 10): Observable<ManufacturerSearchResult> {
+  getManufacturers(page: number = 0, size: number = 10): Observable<SearchResult<Manufacturer>> {
     const params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
 
-    return this._httpClient.get<ManufacturerSearchResult>(this.baseUrl, {params});
+    return this._httpClient.get<SearchResult<Manufacturer>>(this.baseUrl, {params});
   }
 
   createManufacturer(manufacturerRequest: ManufacturerRequest): Observable<Manufacturer> {

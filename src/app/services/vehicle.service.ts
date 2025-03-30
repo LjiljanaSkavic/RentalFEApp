@@ -3,6 +3,8 @@ import { Observable } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { SearchResult } from "../model/SearchResult";
 import { Vehicle } from "../model/Vehicle";
+import { VehicleRequest } from "../model/VehicleRequest";
+import { Manufacturer } from "../model/Manufacturer";
 
 @Injectable({
   providedIn: 'root'
@@ -28,4 +30,11 @@ export class VehicleService {
     return this._httpClient.delete<boolean>(`${this.baseUrl}/${id}`);
   }
 
+  update(vehicleRequest: VehicleRequest, vehicleId: number): Observable<any> {
+    return this._httpClient.put<Manufacturer>(`${this.baseUrl}/${vehicleId}`, vehicleRequest);
+  }
+
+  create(vehicleRequest: VehicleRequest): Observable<any> {
+    return this._httpClient.post<VehicleRequest>(`${this.baseUrl}`, vehicleRequest);
+  }
 }

@@ -38,9 +38,9 @@ export class ProfileDetailsModalComponent implements OnInit, OnDestroy {
       //TODO: Handle error
     } else {
       this.buildProfileForm(this.user);
-      if (this.user.image) {
+      if (this.user.profilePicture) {
         this.getFile();
-        this.selectedFileName = this.user.image.name;
+        this.selectedFileName = this.user.profilePicture.name;
       } else {
         //TODO: Put here file urls to null or empty string
       }
@@ -49,7 +49,7 @@ export class ProfileDetailsModalComponent implements OnInit, OnDestroy {
 
   getFile(): void {
     this.subscriptions.add(
-      this._fileService.getFileById(this.user?.image.id ?? 0).subscribe(
+      this._fileService.getFileById(this.user?.profilePicture.id ?? 0).subscribe(
         (data: Blob) => {
           const reader = new FileReader();
           reader.readAsDataURL(data);
@@ -72,7 +72,7 @@ export class ProfileDetailsModalComponent implements OnInit, OnDestroy {
       username: new FormControl(user.username, Validators.required),
       email: new FormControl(user.email, Validators.required),
       phone: new FormControl(user.phone, Validators.required),
-      profilePicture: new FormControl(user.image?.name || null)
+      profilePicture: new FormControl(user.profilePicture?.name || null)
     });
   }
 
@@ -88,12 +88,12 @@ export class ProfileDetailsModalComponent implements OnInit, OnDestroy {
       phone: this.profileForm.get('phone')?.value,
       email: this.profileForm.get('email')?.value,
       firstName: this.profileForm.get('firstName')?.value,
-      image: this.user!.image,
+      profilePicture: this.user!.profilePicture,
       lastName: this.profileForm.get('lastName')?.value,
       username: this.user!.username,
       role: this.user!.role
     }
-    if (this.user?.image?.name !== this.selectedFileName) {
+    if (this.user?.profilePicture?.name !== this.selectedFileName) {
       this.uploadNewPictureAndSaveUser(editedUser);
     } else {
       this.saveUser({...editedUser, imageId: this.user?.id});
