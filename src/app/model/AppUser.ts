@@ -1,6 +1,6 @@
 import { RentalAppFile } from "./RentalAppFile";
 
-export type UserRole = 'Manager' | 'Administrator' | 'Operator';
+export type UserRole = 'Manager' | 'Admin' | 'Operator';
 
 export interface AppUser {
   id: number;

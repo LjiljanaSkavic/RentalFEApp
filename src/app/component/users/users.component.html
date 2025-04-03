@@ -1,1 +1,95 @@
-<p>users works!</p>
+<div class="page-container">
+  <div class="header-container">
+    <div class="form-column form-column__wide">
+      <mat-form-field>
+        <mat-label>Choose category</mat-label>
+        <mat-select
+          (ngModelChange)="onTypeChange($event)"
+          [(ngModel)]="selectedType">
+          <mat-option
+            *ngFor="let type of types"
+            [value]="type">
+            {{ type | userType }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <button
+      (click)="onAddNewUserClick()"
+      [matTooltip]="'Add user'"
+      class="button-primary"
+      mat-button
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID</mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.id }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <mat-header-cell *matHeaderCellDef> Username</mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.username }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef> First Name</mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.firstName }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef> Last Name</mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.lastName }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> Email</mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.email }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <mat-header-cell *matHeaderCellDef> Phone</mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.phone }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <mat-header-cell *matHeaderCellDef> Role</mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.role }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef> Edit</mat-header-cell>
+      <mat-cell *matCellDef="let user; let index = index">
+        <button
+          (click)="onEditClick(user)"
+          class="button-primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef> Delete</mat-header-cell>
+      <mat-cell *matCellDef="let user; let index = index">
+        <button
+          (click)="onDeleteClick(user)"
+          class="button-danger">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+
+<mat-paginator
+  (page)="onPageChange($event)"
+  [length]="totalUsers"
+  [pageSize]="pageSize"
+  class="mat-paginator"
+></mat-paginator>

@@ -34,6 +34,8 @@ import { ConfirmationModalComponent } from "./component/confirmation-modal/confi
 import { MatSelectModule } from "@angular/material/select";
 import { VehicleModalComponent } from './component/vehicles/vehicle-modal/vehicle-modal.component';
 import { VehicleTypePipe } from "./pipes/vehicle-category.pipe";
+import { UserModalComponent } from './component/users/user-modal/user-modal.component';
+import { UserTypePipe } from "./pipes/user-type.pipe";
 
 export const ANGULAR_MATERIAL_MODULES = [
   MatCardModule,
@@ -64,7 +66,9 @@ export const ANGULAR_MATERIAL_MODULES = [
     ManufacturerModalComponent,
     ConfirmationModalComponent,
     VehicleModalComponent,
-    VehicleTypePipe
+    VehicleTypePipe,
+    UserTypePipe,
+    UserModalComponent
   ],
   imports: [
     BrowserModule,

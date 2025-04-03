@@ -29,21 +29,21 @@
     <mat-nav-list>
       <button
         (click)="drawer.close()"
-        *ngIf="user?.role === 'Administrator' || user?.role === 'Manager'"
+        *ngIf="user?.role === 'Admin' || user?.role === 'Manager'"
         class="mat-list-item"
         routerLink="/vehicles"
         routerLinkActive="active">Vehicles
       </button>
       <button
         (click)="drawer.close()"
-        *ngIf="user?.role === 'Administrator' || user?.role === 'Manager'"
+        *ngIf="user?.role === 'Admin' || user?.role === 'Manager'"
         class="mat-list-item"
         routerLink="/manufacturers"
         routerLinkActive="active">Manufacturers
       </button>
       <button
         (click)="drawer.close()"
-        *ngIf="user?.role === 'Administrator'"
+        *ngIf="user?.role === 'Admin'"
         class="mat-list-item"
         routerLink="/users"
         routerLinkActive="active">Users

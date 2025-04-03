@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { AppUser } from "../model/AppUser";
 import { Observable } from "rxjs";
 import { AppUserRequest } from "../model/AppUserRequest";
+import { SearchResult } from "../model/SearchResult";
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,16 @@ export class UserService {
     })
   }
 
+  getUsers(page: number = 0, size: number = 10, type: string): Observable<SearchResult<AppUser>> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString())
+      .set('type', type.toString());
+
+    return this._httpClient.get<SearchResult<AppUser>>(this.baseUrl, {params});
+  }
+
+
   changePassword(userId: number, currentPassword: string, newPassword: string) {
     const changePasswordUrl = `${this.baseUrl}/change-password/${userId}`;
     const changePasswordData = {
@@ -47,4 +58,7 @@ export class UserService {
     return this._httpClient.put<AppUser>(editUserUrl, user);
   }
 
+  deleteById(id: number): Observable<boolean> {
+    return this._httpClient.delete<boolean>(`${this.baseUrl}/${id}`);
+  }
 }
