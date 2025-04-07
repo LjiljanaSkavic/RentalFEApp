@@ -73,9 +73,9 @@
     <ng-container matColumnDef="userFirstAndLastName">
       <mat-header-cell
         *matHeaderCellDef
-        mat-sort-header> User Name
+        mat-sort-header> User
       </mat-header-cell>
-      <mat-cell *matCellDef="let rental"> {{ rental.userFirstAndLastName }} </mat-cell>
+      <mat-cell *matCellDef="let rental"> {{ rental.client.firstName }} {{ rental.client.lastName }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="vehicleCodeAndModel">
@@ -83,7 +83,7 @@
         *matHeaderCellDef
         mat-sort-header> Vehicle Code - Model
       </mat-header-cell>
-      <mat-cell *matCellDef="let rental"> {{ rental.vehicleCodeAndModel }} </mat-cell>
+      <mat-cell *matCellDef="let rental"> {{ rental.vehicle.vehicleCode }}-{{ rental.vehicle.model }} </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row

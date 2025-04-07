@@ -1,3 +1,6 @@
+import { Client } from "./AppUser";
+import { Vehicle } from "./Vehicle";
+
 export interface Rental {
   id: number;
   start: Date;
@@ -7,8 +10,8 @@ export interface Rental {
   duration: string;
   identificationCard: string;
   driverLicence: string;
-  userFirstAndLastName: string;
-  vehicleCodeAndModel: string;
+  client: Client;
+  vehicle: Vehicle;
 }
 
 export interface Point {
