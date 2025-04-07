@@ -61,4 +61,8 @@ export class UserService {
   deleteById(id: number): Observable<boolean> {
     return this._httpClient.delete<boolean>(`${this.baseUrl}/${id}`);
   }
+
+  manageBlock(id: number): Observable<boolean> {
+    return this._httpClient.post<boolean>(`${this.baseUrl}/manage-block/${id}`, {});
+  }
 }

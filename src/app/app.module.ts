@@ -36,6 +36,7 @@ import { VehicleModalComponent } from './component/vehicles/vehicle-modal/vehicl
 import { VehicleTypePipe } from "./pipes/vehicle-category.pipe";
 import { UserModalComponent } from './component/users/user-modal/user-modal.component';
 import { UserTypePipe } from "./pipes/user-type.pipe";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 
 export const ANGULAR_MATERIAL_MODULES = [
   MatCardModule,
@@ -82,6 +83,7 @@ export const ANGULAR_MATERIAL_MODULES = [
     MatTableModule,
     MatSortModule,
     MatSelectModule,
+    MatSlideToggleModule,
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]

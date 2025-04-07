@@ -7,6 +7,7 @@ import { EMPTY, Subscription, switchMap } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationModalComponent } from "../confirmation-modal/confirmation-modal.component";
 import { UserModalComponent } from "./user-modal/user-modal.component";
+import { MatSlideToggleChange } from "@angular/material/slide-toggle";
 
 @Component({
   selector: 'app-users',
@@ -23,23 +24,26 @@ export class UsersComponent implements OnInit, OnDestroy {
   selectedType = '';
   subscriptions = new Subscription();
 
-  displayedColumns: string[] = ['id', 'username', 'firstName', 'lastName', 'email', 'phone', 'role', 'edit', 'delete'];
+  displayedColumnsClient: string[] = ['id', 'username', 'firstName', 'lastName', 'email', 'phone', 'block'];
+  displayedColumnsEmployee: string[] = ['id', 'username', 'firstName', 'lastName', 'email', 'phone', 'role', 'edit', 'delete'];
+  displayedColumns: string[] = [];
   dataSource = new MatTableDataSource<AppUser>(this.users);
 
   @ViewChild(MatPaginator) paginator: MatPaginator = {} as MatPaginator;
 
-  constructor(private userService: UserService,
+  constructor(private _userService: UserService,
               public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.selectedType = this.types[0];
+    this.updateDisplayedColumns();
     this.loadUsers();
   }
 
   loadUsers(): void {
     this.isLoading = true;
-    this.subscriptions.add(this.userService.getUsers(this.pageIndex, this.pageSize, this.selectedType).subscribe(res => {
+    this.subscriptions.add(this._userService.getUsers(this.pageIndex, this.pageSize, this.selectedType).subscribe(res => {
       this.users = res.data;
       this.totalUsers = res.totalElements;
       this.dataSource.data = this.users;
@@ -55,7 +59,16 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   onTypeChange(type: any): void {
     this.selectedType = type;
+    this.updateDisplayedColumns();
     this.loadUsers();
+  }
+
+  updateDisplayedColumns(): void {
+    if (this.selectedType === 'EMPLOYEE') {
+      this.displayedColumns = this.displayedColumnsEmployee;
+    } else {
+      this.displayedColumns = this.displayedColumnsClient;
+    }
   }
 
   onEditClick(user: AppUser): void {
@@ -88,7 +101,29 @@ export class UsersComponent implements OnInit, OnDestroy {
     }).afterClosed()
       .pipe(
         switchMap(result => {
-          return result ? this.userService.deleteById(user.id) : EMPTY;
+          return result ? this._userService.deleteById(user.id) : EMPTY;
+        })
+      )
+      .subscribe(res => {
+        const index = this.users.findIndex(u => u.id === user.id);
+        if (index !== -1) {
+          this.loadUsers();
+        }
+      });
+  }
+
+  onBlockClick(user: AppUser, event: MatSlideToggleChange): void {
+    this.dialog.open(ConfirmationModalComponent, {
+      data: {
+        title: "Block user",
+        text: `Are you sure that you want to ${event.checked ? 'block' : 'unblock'} this user?`
+      },
+      hasBackdrop: true,
+      backdropClass: 'rental-app-backdrop'
+    }).afterClosed()
+      .pipe(
+        switchMap(result => {
+          return result ? this._userService.manageBlock(user.id) : EMPTY;
         })
       )
       .subscribe(res => {
