@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UserService } from "../../services/user.service";
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
-import { AppUser } from "../../model/AppUser";
+import { AppUser, Client } from "../../model/AppUser";
 import { MatTableDataSource } from "@angular/material/table";
 import { EMPTY, Subscription, switchMap } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
@@ -15,7 +15,7 @@ import { MatSlideToggleChange } from "@angular/material/slide-toggle";
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit, OnDestroy {
-  users: AppUser[] = [];
+  users: AppUser[] | Client[] = [];
   isLoading = true;
   pageIndex = 0;
   pageSize = 10;
@@ -44,7 +44,11 @@ export class UsersComponent implements OnInit, OnDestroy {
   loadUsers(): void {
     this.isLoading = true;
     this.subscriptions.add(this._userService.getUsers(this.pageIndex, this.pageSize, this.selectedType).subscribe(res => {
-      this.users = res.data;
+      if (this.selectedType === 'EMPLOYEE') {
+        this.users = res.data.filter(user => !user.deleted);
+      } else {
+        this.users = res.data;
+      }
       this.totalUsers = res.totalElements;
       this.dataSource.data = this.users;
       this.isLoading = false;

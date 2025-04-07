@@ -9,6 +9,13 @@ export interface AppUser {
   lastName: string;
   email: string;
   phone: string;
-  role: UserRole;
   profilePicture: RentalAppFile;
+  role: UserRole;
+  deleted: boolean;
 }
+
+export interface Client extends AppUser {
+  cardNumber: string;
+  isBlocked: boolean;
+}
+

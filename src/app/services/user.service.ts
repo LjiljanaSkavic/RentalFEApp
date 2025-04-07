@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { AppUser } from "../model/AppUser";
+import { AppUser, Client } from "../model/AppUser";
 import { Observable } from "rxjs";
 import { AppUserRequest } from "../model/AppUserRequest";
 import { SearchResult } from "../model/SearchResult";
@@ -34,13 +34,13 @@ export class UserService {
     })
   }
 
-  getUsers(page: number = 0, size: number = 10, type: string): Observable<SearchResult<AppUser>> {
+  getUsers(page: number = 0, size: number = 10, type: string): Observable<SearchResult<AppUser | Client>> {
     const params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString())
       .set('type', type.toString());
 
-    return this._httpClient.get<SearchResult<AppUser>>(this.baseUrl, {params});
+    return this._httpClient.get<SearchResult<AppUser | Client>>(this.baseUrl, {params});
   }
 
 

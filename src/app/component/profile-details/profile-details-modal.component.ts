@@ -91,7 +91,8 @@ export class ProfileDetailsModalComponent implements OnInit, OnDestroy {
       profilePicture: this.user!.profilePicture,
       lastName: this.profileForm.get('lastName')?.value,
       username: this.user!.username,
-      role: this.user!.role
+      role: this.user!.role,
+      deleted: false
     }
     if (this.user?.profilePicture?.name !== this.selectedFileName) {
       this.uploadNewPictureAndSaveUser(editedUser);
