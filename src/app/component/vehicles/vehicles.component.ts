@@ -8,6 +8,9 @@ import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { ConfirmationModalComponent } from "../confirmation-modal/confirmation-modal.component";
 import { VehicleModalComponent } from "./vehicle-modal/vehicle-modal.component";
 import { Router } from "@angular/router";
+import { MalfunctionModalComponent } from '../malfunction-modal/malfunction-modal.component';
+import { snackBarConfig } from "../../shared/constants";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-vehicles',
@@ -24,11 +27,12 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   selectedCategory = '';
   dataSource = new MatTableDataSource<Vehicle>(this.vehicles);
   categories = ['CAR', 'E_BIKE', 'E_SCOOTER'];
-  displayedColumns: string[] = ['id', 'vehicleCode', 'purchasePrice', 'model', 'status', 'edit', 'delete'];
+  displayedColumns: string[] = ['id', 'vehicleCode', 'purchasePrice', 'model', 'status', 'edit', 'delete', 'add-malfunction'];
   @ViewChild(MatPaginator) paginator: MatPaginator = {} as MatPaginator;
 
   constructor(private _vehicleService: VehicleService,
               private _router: Router,
+              private _snackBar: MatSnackBar,
               public dialog: MatDialog) {
   }
 
@@ -93,6 +97,20 @@ export class VehiclesComponent implements OnInit, OnDestroy {
           this.vehicles[manufacturerIndex] = result;
           this.dataSource.data = this.vehicles;
         }
+      }
+    });
+  }
+
+  onAddMalfunctionClick(vehicle: Vehicle): void {
+    this.dialog.open(MalfunctionModalComponent, {
+      data: {
+        vehicleId: vehicle.id
+      },
+      hasBackdrop: true,
+      backdropClass: 'rental-app-backdrop'
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this._snackBar.open("Malfunction successfully added.", "OK", snackBarConfig);
       }
     });
   }

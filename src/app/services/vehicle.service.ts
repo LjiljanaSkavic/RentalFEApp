@@ -5,6 +5,7 @@ import { SearchResult } from "../model/SearchResult";
 import { Vehicle } from "../model/Vehicle";
 import { VehicleRequest } from "../model/VehicleRequest";
 import { Manufacturer } from "../model/Manufacturer";
+import { MalfunctionRequest } from "../model/malfunction";
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,9 @@ export class VehicleService {
 
   create(vehicleRequest: VehicleRequest): Observable<any> {
     return this._httpClient.post<VehicleRequest>(`${this.baseUrl}`, vehicleRequest);
+  }
+
+  addMalfunction(malfunctionRequest: MalfunctionRequest): Observable<any> {
+    return this._httpClient.post<MalfunctionRequest>(`${this.baseUrl}/${malfunctionRequest.vehicleId}/malfunction`, malfunctionRequest);
   }
 }

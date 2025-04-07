@@ -1,0 +1,66 @@
+<div class="malfunction-container">
+  <div
+    class="malfunction-container__header"
+    mat-dialog-title>Add Malfunction
+  </div>
+
+  <form
+    [formGroup]="malfunctionForm"
+    class="form-wrapper">
+    <div class="form-wrapper__group">
+      <mat-form-field class="form-field">
+        <mat-label>Date</mat-label>
+        <input
+          [matDatepicker]="picker"
+          formControlName="date"
+          matInput
+          placeholder="Select malfunction date">
+        <mat-datepicker-toggle
+          [for]="picker"
+          matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="malfunctionForm.get('date')?.hasError('required')">
+          Date is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Time</mat-label>
+        <input
+          formControlName="time"
+          matInput
+          placeholder="Enter malfunction time">
+        <mat-error *ngIf="malfunctionForm.get('time')?.hasError('required')">
+          Time is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Description</mat-label>
+        <textarea
+          formControlName="description"
+          matInput
+          placeholder="Enter malfunction description"></textarea>
+        <mat-error *ngIf="malfunctionForm.get('description')?.hasError('required')">
+          Description is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+
+  <div
+    class="button-wrapper"
+    mat-dialog-actions>
+    <button
+      [mat-dialog-close]="null"
+      class="button-discard"
+      mat-button>Discard
+    </button>
+    <button
+      (click)="onDialogClose()"
+      class="button-save"
+      mat-button>
+      Save
+    </button>
+  </div>
+</div>

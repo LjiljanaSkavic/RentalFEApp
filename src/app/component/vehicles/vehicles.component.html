@@ -78,6 +78,17 @@
       </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="add-malfunction">
+      <mat-header-cell *matHeaderCellDef>Add Malfunction</mat-header-cell>
+      <mat-cell *matCellDef="let vehicle; let index = index">
+        <button
+          (click)="onAddMalfunctionClick(vehicle); $event.stopPropagation()"
+          class="button-primary">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef> Delete</mat-header-cell>
       <mat-cell *matCellDef="let vehicle; let index = index">

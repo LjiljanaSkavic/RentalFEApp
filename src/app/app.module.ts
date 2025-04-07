@@ -37,6 +37,9 @@ import { VehicleTypePipe } from "./pipes/vehicle-category.pipe";
 import { UserModalComponent } from './component/users/user-modal/user-modal.component';
 import { UserTypePipe } from "./pipes/user-type.pipe";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { MalfunctionModalComponent } from './component/malfunction-modal/malfunction-modal.component';
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
 
 export const ANGULAR_MATERIAL_MODULES = [
   MatCardModule,
@@ -49,7 +52,14 @@ export const ANGULAR_MATERIAL_MODULES = [
   MatToolbarModule,
   MatSidenavModule,
   MatListModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatPaginatorModule,
+  MatTableModule,
+  MatSortModule,
+  MatSelectModule,
+  MatSlideToggleModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 ]
 
 @NgModule({
@@ -69,7 +79,8 @@ export const ANGULAR_MATERIAL_MODULES = [
     VehicleModalComponent,
     VehicleTypePipe,
     UserTypePipe,
-    UserModalComponent
+    UserModalComponent,
+    MalfunctionModalComponent
   ],
   imports: [
     BrowserModule,
@@ -79,11 +90,6 @@ export const ANGULAR_MATERIAL_MODULES = [
     ReactiveFormsModule,
     HttpClientModule,
     ANGULAR_MATERIAL_MODULES,
-    MatPaginatorModule,
-    MatTableModule,
-    MatSortModule,
-    MatSelectModule,
-    MatSlideToggleModule,
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]
