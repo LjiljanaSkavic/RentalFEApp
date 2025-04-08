@@ -29,12 +29,16 @@
         <input
           formControlName="time"
           matInput
-          placeholder="Enter malfunction time">
+          placeholder="Enter malfunction time (hh:mm:ss)"
+        />
         <mat-error *ngIf="malfunctionForm.get('time')?.hasError('required')">
           Time is required.
         </mat-error>
+        <mat-error *ngIf="malfunctionForm.get('time')?.hasError('pattern')">
+          Invalid time format. Use hh:mm:ss.
+        </mat-error>
       </mat-form-field>
-
+      
       <mat-form-field class="form-field">
         <mat-label>Description</mat-label>
         <textarea

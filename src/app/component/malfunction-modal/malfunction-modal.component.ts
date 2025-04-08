@@ -31,7 +31,8 @@ export class MalfunctionModalComponent implements OnInit, OnDestroy {
   buildMalfunctionForm(): void {
     this.malfunctionForm = new FormGroup({
       date: new FormControl(null, Validators.required),
-      time: new FormControl(null, Validators.required),
+      time: new FormControl(null, [Validators.required,
+        Validators.pattern(/^([01]?[0-9]|2[0-3]):([0-5]?[0-9]):([0-5]?[0-9])$/)]), //hh:mm:ss
       description: new FormControl(null, Validators.required)
     });
   }
