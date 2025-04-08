@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Subscription } from "rxjs";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MalfunctionRequest } from "../../model/malfunction";
-import { VehicleService } from "../../services/vehicle.service";
+import { MalfunctionService } from "../../services/malfunction-service";
 
 export interface MalfunctionModalData {
   vehicleId: number;
@@ -19,7 +19,7 @@ export class MalfunctionModalComponent implements OnInit, OnDestroy {
   malfunctionRequest: MalfunctionRequest = {} as MalfunctionRequest;
   subscriptions = new Subscription();
 
-  constructor(private _vehicleService: VehicleService,
+  constructor(private _malfunctionService: MalfunctionService,
               private dialogRef: MatDialogRef<MalfunctionModalComponent>,
               @Inject(MAT_DIALOG_DATA) public data: MalfunctionModalData) {
   }
@@ -51,7 +51,7 @@ export class MalfunctionModalComponent implements OnInit, OnDestroy {
     };
 
     this.subscriptions.add(
-      this._vehicleService.addMalfunction(this.malfunctionRequest).subscribe(res => {
+      this._malfunctionService.create(this.malfunctionRequest).subscribe(res => {
         this.dialogRef.close(res);
       }));
   }
