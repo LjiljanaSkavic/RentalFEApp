@@ -22,7 +22,7 @@ import { ManufacturersComponent } from './component/manufacturers/manufacturers.
 import { UsersComponent } from './component/users/users.component';
 import { StatisticsComponent } from './component/statistics/statistics.component';
 import { VehicleDetailsComponent } from './component/vehicles/vehicle-details/vehicle-details.component';
-import { RentalComponent } from './component/rental/rental.component';
+import { RentalsComponent } from './component/rentals/rentals.component';
 import { ProfileDetailsModalComponent } from "./component/profile-details/profile-details-modal.component";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { ManagePasswordModalComponent } from './component/manage-password-modal/manage-password-modal.component';
@@ -40,6 +40,9 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MalfunctionModalComponent } from './component/malfunction-modal/malfunction-modal.component';
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
+import { CarouselComponent } from "./component/carousel/carousel.component";
+import { RentalComponent } from './component/rentals/rental/rental.component';
+import { MalfunctionComponent } from './component/malfunction-modal/malfunction/malfunction.component';
 
 export const ANGULAR_MATERIAL_MODULES = [
   MatCardModule,
@@ -72,7 +75,7 @@ export const ANGULAR_MATERIAL_MODULES = [
     StatisticsComponent,
     VehicleDetailsComponent,
     ProfileDetailsModalComponent,
-    RentalComponent,
+    RentalsComponent,
     ManagePasswordModalComponent,
     ManufacturerModalComponent,
     ConfirmationModalComponent,
@@ -80,7 +83,10 @@ export const ANGULAR_MATERIAL_MODULES = [
     VehicleTypePipe,
     UserTypePipe,
     UserModalComponent,
-    MalfunctionModalComponent
+    MalfunctionModalComponent,
+    CarouselComponent,
+    RentalComponent,
+    MalfunctionComponent
   ],
   imports: [
     BrowserModule,

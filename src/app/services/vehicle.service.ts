@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { SearchResult } from "../model/SearchResult";
-import { Vehicle } from "../model/Vehicle";
+import { CarDetails, ElectricBikeDetails, ElectricScooterDetails, Vehicle } from "../model/Vehicle";
 import { VehicleRequest } from "../model/VehicleRequest";
 import { Manufacturer } from "../model/Manufacturer";
 
@@ -36,5 +36,9 @@ export class VehicleService {
 
   create(vehicleRequest: VehicleRequest): Observable<any> {
     return this._httpClient.post<VehicleRequest>(`${this.baseUrl}`, vehicleRequest);
+  }
+
+  getById(id: number): Observable<CarDetails | ElectricBikeDetails | ElectricScooterDetails> {
+    return this._httpClient.get<CarDetails | ElectricBikeDetails | ElectricScooterDetails>(`${this.baseUrl}/${id}`);
   }
 }

@@ -1,0 +1,17 @@
+<div class="carousel-container">
+    <div
+        *ngFor="let image of images; let i = index"
+        [class.active]="i === activeIndex"
+        [class.next]="i === activeIndex + 1 || (activeIndex === this.images.length - 1 && i === 0)"
+        [class.prev]="i === activeIndex - 1 || (activeIndex === 0 && i === this.images.length - 1)">
+        <div class="carousel-slide">
+            <img [src]="image">
+        </div>
+    </div>
+    <div
+        *ngIf="images.length > 1"
+        class="carousel-nav">
+        <button (click)="prevSlide()">Previous</button>
+        <button (click)="nextSlide()">Next</button>
+    </div>
+</div>

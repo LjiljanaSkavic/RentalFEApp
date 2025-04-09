@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Subscription } from "rxjs";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { MalfunctionRequest } from "../../model/malfunction";
+import { MalfunctionRequest } from "../../model/Malfunction";
 import { MalfunctionService } from "../../services/malfunction-service";
 
 export interface MalfunctionModalData {

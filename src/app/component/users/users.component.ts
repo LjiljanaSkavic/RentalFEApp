@@ -81,7 +81,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         user: user
       },
       hasBackdrop: true,
-      backdropClass: 'rental-app-backdrop'
+      backdropClass: 'rentals-app-backdrop'
     }).afterClosed().subscribe(result => {
       if (result) {
         const userIndex = this.users.findIndex(u => u.id === result.id);
@@ -101,7 +101,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         text: "Are you sure that you want to delete this user?"
       },
       hasBackdrop: true,
-      backdropClass: 'rental-app-backdrop'
+      backdropClass: 'rentals-app-backdrop'
     }).afterClosed()
       .pipe(
         switchMap(result => {
@@ -123,7 +123,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         text: `Are you sure that you want to ${event.checked ? 'block' : 'unblock'} this user?`
       },
       hasBackdrop: true,
-      backdropClass: 'rental-app-backdrop'
+      backdropClass: 'rentals-app-backdrop'
     }).afterClosed()
       .pipe(
         switchMap(result => {
@@ -141,7 +141,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   onAddNewUserClick(): void {
     this.dialog.open(UserModalComponent, {
       hasBackdrop: true,
-      backdropClass: 'rental-app-backdrop'
+      backdropClass: 'rentals-app-backdrop'
     }).afterClosed().subscribe(result => {
       if (result) {
         const calculatedPageIndex = Math.ceil((this.totalUsers + 1) / this.pageSize);

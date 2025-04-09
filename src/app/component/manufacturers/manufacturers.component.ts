@@ -56,7 +56,7 @@ export class ManufacturersComponent implements OnInit, OnDestroy {
         manufacturer: manufacturer
       },
       hasBackdrop: true,
-      backdropClass: 'rental-app-backdrop'
+      backdropClass: 'rentals-app-backdrop'
     }).afterClosed().subscribe(result => {
       if (result) {
         const manufacturerIndex = this.manufacturers.findIndex(m => m.id === result.id);
@@ -76,7 +76,7 @@ export class ManufacturersComponent implements OnInit, OnDestroy {
         text: "Are you sure that you want to delete this manufacturer?"
       },
       hasBackdrop: true,
-      backdropClass: 'rental-app-backdrop'
+      backdropClass: 'rentals-app-backdrop'
     }).afterClosed()
       .pipe(
         switchMap(result => {
@@ -94,7 +94,7 @@ export class ManufacturersComponent implements OnInit, OnDestroy {
   onAddNewManufacturerClick(): void {
     this.dialog.open(ManufacturerModalComponent, {
       hasBackdrop: true,
-      backdropClass: 'rental-app-backdrop'
+      backdropClass: 'rentals-app-backdrop'
     }).afterClosed().subscribe(result => {
       if (result) {
         const calculatedPageIndex = Math.ceil((this.totalManufacturers + 1) / this.pageSize);

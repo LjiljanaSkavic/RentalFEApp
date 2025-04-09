@@ -6,11 +6,11 @@ import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { RentalService } from "../../services/rental.service";
 
 @Component({
-  selector: 'app-rental',
-  templateUrl: './rental.component.html',
-  styleUrls: ['./rental.component.scss']
+  selector: 'app-rentals',
+  templateUrl: './rentals.component.html',
+  styleUrls: ['./rentals.component.scss']
 })
-export class RentalComponent implements OnInit, OnDestroy {
+export class RentalsComponent implements OnInit, OnDestroy {
   rentals: Rental[] = [];
   isLoading = true;
   pageIndex = 0;

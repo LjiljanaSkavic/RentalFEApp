@@ -71,7 +71,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
         vehicleType: this.selectedCategory
       },
       hasBackdrop: true,
-      backdropClass: 'rental-app-backdrop'
+      backdropClass: 'rentals-app-backdrop'
     }).afterClosed().subscribe(result => {
       if (result) {
         const calculatedPageIndex = Math.ceil((this.totalVehicles + 1) / this.pageSize);
@@ -88,7 +88,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
         vehicleType: this.selectedCategory
       },
       hasBackdrop: true,
-      backdropClass: 'rental-app-backdrop'
+      backdropClass: 'rentals-app-backdrop'
     }).afterClosed().subscribe(result => {
       if (result) {
         const manufacturerIndex = this.vehicles.findIndex(m => m.id === result.id);
@@ -107,7 +107,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
         vehicleId: vehicle.id
       },
       hasBackdrop: true,
-      backdropClass: 'rental-app-backdrop'
+      backdropClass: 'rentals-app-backdrop'
     }).afterClosed().subscribe(result => {
       if (result) {
         this._snackBar.open("Malfunction successfully added.", "OK", snackBarConfig);
@@ -122,7 +122,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
         text: "Are you sure that you want to delete this vehicle?"
       },
       hasBackdrop: true,
-      backdropClass: 'rental-app-backdrop'
+      backdropClass: 'rentals-app-backdrop'
     }).afterClosed()
       .pipe(
         switchMap(result => {
@@ -143,9 +143,10 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   }
 
   onRowClick(vehicle: Vehicle): void {
-    this._router.navigateByUrl(`vehicles/${vehicle.id}`).catch(err => console.log(err));
+    console.log(this.selectedCategory);
+    this._router.navigate([`vehicles/${vehicle.id}`],
+      {queryParams: {type: this.selectedCategory}}).catch(err => console.log(err));
   }
-
 
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;

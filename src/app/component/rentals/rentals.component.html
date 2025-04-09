@@ -46,6 +46,14 @@
       </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="userFirstAndLastName">
+      <mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header> User
+      </mat-header-cell>
+      <mat-cell *matCellDef="let rental"> {{ rental.client.firstName }} {{ rental.client.lastName }} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="duration">
       <mat-header-cell
         *matHeaderCellDef
@@ -68,14 +76,6 @@
         mat-sort-header> Driver Licence
       </mat-header-cell>
       <mat-cell *matCellDef="let rental"> {{ rental.driverLicence }} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="userFirstAndLastName">
-      <mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header> User
-      </mat-header-cell>
-      <mat-cell *matCellDef="let rental"> {{ rental.client.firstName }} {{ rental.client.lastName }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="vehicleCodeAndModel">

@@ -1,0 +1,58 @@
+<div class="rentals-wrapper">
+  <mat-form-field class="form-field">
+    <mat-label>Start Date</mat-label>
+    <input
+      [value]="rental.start.toString()"
+      disabled
+      matInput/>
+  </mat-form-field>
+  <mat-form-field class="form-field">
+    <mat-label>End Date</mat-label>
+    <input
+      [value]="rental.end.toString()"
+      disabled
+      matInput/>
+  </mat-form-field>
+  <mat-form-field class="form-field">
+    <mat-label>Start Location</mat-label>
+    <input
+      [value]="rental.startLocation.lat + '; ' + rental.startLocation.lng"
+      disabled
+      matInput/>
+  </mat-form-field>
+  <mat-form-field class="form-field">
+    <mat-label>End Location</mat-label>
+    <input
+      [value]="rental.endLocation.lat + '; ' + rental.endLocation.lng"
+      disabled
+      matInput/>
+  </mat-form-field>
+  <mat-form-field class="form-field">
+    <mat-label>Client</mat-label>
+    <input
+      [value]="rental.client.firstName + ' ' + rental.client.lastName"
+      disabled
+      matInput/>
+  </mat-form-field>
+  <mat-form-field class="form-field">
+    <mat-label>Duration</mat-label>
+    <input
+      [value]="rental.duration"
+      disabled
+      matInput/>
+  </mat-form-field>
+  <mat-form-field class="form-field">
+    <mat-label>Driver licence</mat-label>
+    <input
+      [value]="rental.driverLicence"
+      disabled
+      matInput/>
+  </mat-form-field>
+  <mat-form-field class="form-field">
+    <mat-label>ID card</mat-label>
+    <input
+      [value]="rental.identificationCard"
+      disabled
+      matInput/>
+  </mat-form-field>
+</div>

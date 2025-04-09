@@ -1,0 +1,33 @@
+<div class="malfunction-wrapper">
+  <mat-form-field class="form-field">
+    <mat-label>Date</mat-label>
+    <input
+      [value]="malfunction.date.toString()"
+      disabled
+      matInput/>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
+    <mat-label>Time</mat-label>
+    <input
+      [value]="malfunction.time"
+      disabled
+      matInput/>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
+    <mat-label>Description</mat-label>
+    <textarea
+      [value]="malfunction.description"
+      disabled
+      matInput></textarea>
+  </mat-form-field>
+
+  <button
+    (click)="onDeleteMalfunctionClick(malfunction.id)"
+    class="button-danger"
+    mat-button
+    matTooltip="Delete malfunction">
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>

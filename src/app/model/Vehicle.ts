@@ -1,4 +1,5 @@
 import { RentalAppFile } from "./RentalAppFile";
+import { VehicleDetails } from "./VehicleDetails";
 
 export interface Vehicle {
   id: number;
@@ -33,4 +34,13 @@ export interface ElectricBike extends Vehicle {
 
 export interface ElectricScooter extends Vehicle {
   maxSpeed: number;
+}
+
+export interface CarDetails extends Car, VehicleDetails {
+}
+
+export interface ElectricBikeDetails extends ElectricBike, VehicleDetails {
+}
+
+export interface ElectricScooterDetails extends ElectricScooter, VehicleDetails {
 }

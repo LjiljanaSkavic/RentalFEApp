@@ -6,7 +6,7 @@ import { UsersComponent } from "./component/users/users.component";
 import { StatisticsComponent } from "./component/statistics/statistics.component";
 import { VehicleDetailsComponent } from "./component/vehicles/vehicle-details/vehicle-details.component";
 import { ProfileDetailsModalComponent } from "./component/profile-details/profile-details-modal.component";
-import { RentalComponent } from "./component/rental/rental.component";
+import { RentalsComponent } from "./component/rentals/rentals.component";
 
 const routes: Routes = [
   {
@@ -32,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: "rentals",
-    component: RentalComponent
+    component: RentalsComponent
   },
   {
     path: "statistics",

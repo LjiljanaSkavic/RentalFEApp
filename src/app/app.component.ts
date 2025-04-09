@@ -60,7 +60,7 @@ export class AppComponent implements OnInit, OnDestroy {
       {
         disableClose: true,
         hasBackdrop: true,
-        backdropClass: 'rental-app-backdrop'
+        backdropClass: 'rentals-app-backdrop'
       });
     dialogRef.afterClosed().subscribe((user) => {
       this._userStoreService.setUserAsLoggedIn(user);
@@ -84,7 +84,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.collapsed = true;
     this.dialog.open(ProfileDetailsModalComponent, {
         hasBackdrop: true,
-        backdropClass: 'rental-app-backdrop'
+        backdropClass: 'rentals-app-backdrop'
       }
     ).afterClosed().subscribe(() => {
     });
@@ -94,7 +94,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.collapsed = true;
     this.dialog.open(ManagePasswordModalComponent, {
         hasBackdrop: true,
-        backdropClass: 'rental-app-backdrop'
+        backdropClass: 'rentals-app-backdrop'
       }
     ).afterClosed().subscribe(
       () => {
