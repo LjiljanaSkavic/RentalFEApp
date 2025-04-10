@@ -17,12 +17,26 @@
 
     <button
       (click)="onAddNewVehicleClick()"
-      [matTooltip]="'Add vehicle'"
+      [matTooltip]="'Add Vehicle'"
       class="button-primary"
       mat-button
     >
       <mat-icon>add</mat-icon>
     </button>
+    <button
+      (click)="onUploadVehicleClick()"
+      [matTooltip]="'Upload Vehicle'"
+      class="button-primary"
+      mat-button
+    >
+      <mat-icon>upload</mat-icon>
+    </button>
+    <input
+      #fileInput
+      (change)="onFileSelected($event)"
+      accept=".csv"
+      style="display:none"
+      type="file">
   </div>
   <mat-table
     [dataSource]="dataSource"

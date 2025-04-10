@@ -29,6 +29,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   categories = ['CAR', 'E_BIKE', 'E_SCOOTER'];
   displayedColumns: string[] = ['id', 'vehicleCode', 'purchasePrice', 'model', 'status', 'edit', 'delete', 'add-malfunction'];
   @ViewChild(MatPaginator) paginator: MatPaginator = {} as MatPaginator;
+  @ViewChild('fileInput') fileInput: any;
 
   constructor(private _vehicleService: VehicleService,
               private _router: Router,
@@ -152,6 +153,56 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     this.loadVehicles();
+  }
+
+  onUploadVehicleClick(): void {
+    this.fileInput.nativeElement.click();
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input?.files?.[0];
+
+    if (file) {
+      if (file.type !== 'text/csv') {
+        this._snackBar.open('Please upload a valid CSV file.', 'Close', {duration: 3000});
+        return;
+      }
+
+      this.readCSVFile(file);
+    }
+  }
+
+  readCSVFile(file: File): void {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const csvData = reader.result as string;
+
+      // Manually parse the CSV content
+      const lines = csvData.split('\n');
+      const headers = lines[0].split(',');  // Assuming the first line is the header
+      const rows = [];
+
+      for (let i = 1; i < lines.length; i++) {
+        const row = lines[i].split(',');
+        if (row.length === headers.length) {
+          const rowData = headers.reduce((acc: any, header: string, index: number) => {
+            acc[header.trim()] = row[index].trim();
+            return acc;
+          }, {});
+          rows.push(rowData);
+        }
+      }
+      //TODO: Add code when BE is finished
+      this._snackBar.open('Vehicle uploaded successfully!', 'Close', {duration: 3000});
+    };
+
+    reader.onerror = () => {
+      this._snackBar.open('Error reading file.', 'Close', {duration: 3000});
+    };
+
+    reader.readAsText(file);
   }
 
   ngOnDestroy(): void {
