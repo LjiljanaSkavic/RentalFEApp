@@ -16,11 +16,11 @@ export interface UserModalData {
 }
 
 @Component({
-    selector: 'app-profile-details-modal',
-    templateUrl: './profile-details-modal.component.html',
-    styleUrls: ['./profile-details-modal.component.scss']
+    selector: 'app-user-modal',
+    templateUrl: './user-modal.component.html',
+    styleUrls: ['./user-modal.component.scss']
 })
-export class ProfileDetailsModalComponent implements OnInit, OnDestroy {
+export class UserModalComponent implements OnInit, OnDestroy {
     profileForm: FormGroup = {} as FormGroup;
     user: AppUser | null = null;
     selectedFile: File | null = null;
@@ -34,7 +34,7 @@ export class ProfileDetailsModalComponent implements OnInit, OnDestroy {
                 private _fileService: FileService,
                 private _userService: UserService,
                 private _snackBar: MatSnackBar,
-                private _dialogRef: MatDialogRef<ProfileDetailsModalComponent>,
+                private _dialogRef: MatDialogRef<UserModalComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: UserModalData) {
     }
 

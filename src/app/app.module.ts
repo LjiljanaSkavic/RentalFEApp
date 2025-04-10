@@ -23,7 +23,7 @@ import { UsersComponent } from './component/users/users.component';
 import { StatisticsComponent } from './component/statistics/statistics.component';
 import { VehicleDetailsComponent } from './component/vehicles/vehicle-details/vehicle-details.component';
 import { RentalsComponent } from './component/rentals/rentals.component';
-import { ProfileDetailsModalComponent } from "./component/profile-details/profile-details-modal.component";
+import { UserModalComponent } from "./component/user-modal/user-modal.component";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { ManagePasswordModalComponent } from './component/manage-password-modal/manage-password-modal.component';
 import { MatPaginatorModule } from "@angular/material/paginator";
@@ -44,59 +44,59 @@ import { RentalComponent } from './component/rentals/rental/rental.component';
 import { MalfunctionComponent } from './component/malfunction-modal/malfunction/malfunction.component';
 
 export const ANGULAR_MATERIAL_MODULES = [
-  MatCardModule,
-  MatInputModule,
-  MatIconModule,
-  MatFormFieldModule,
-  MatButtonModule,
-  MatDialogModule,
-  MatTooltipModule,
-  MatToolbarModule,
-  MatSidenavModule,
-  MatListModule,
-  MatSnackBarModule,
-  MatPaginatorModule,
-  MatTableModule,
-  MatSortModule,
-  MatSelectModule,
-  MatSlideToggleModule,
-  MatDatepickerModule,
-  MatNativeDateModule
+    MatCardModule,
+    MatInputModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatTooltipModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatSnackBarModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 ]
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    VehiclesComponent,
-    ManufacturersComponent,
-    UsersComponent,
-    StatisticsComponent,
-    VehicleDetailsComponent,
-    ProfileDetailsModalComponent,
-    RentalsComponent,
-    ManagePasswordModalComponent,
-    ManufacturerModalComponent,
-    ConfirmationModalComponent,
-    VehicleModalComponent,
-    VehicleTypePipe,
-    UserTypePipe,
-    MalfunctionModalComponent,
-    CarouselComponent,
-    RentalComponent,
-    MalfunctionComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    ANGULAR_MATERIAL_MODULES,
-  ],
-  providers: [HttpClient],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        VehiclesComponent,
+        ManufacturersComponent,
+        UsersComponent,
+        StatisticsComponent,
+        VehicleDetailsComponent,
+        UserModalComponent,
+        RentalsComponent,
+        ManagePasswordModalComponent,
+        ManufacturerModalComponent,
+        ConfirmationModalComponent,
+        VehicleModalComponent,
+        VehicleTypePipe,
+        UserTypePipe,
+        MalfunctionModalComponent,
+        CarouselComponent,
+        RentalComponent,
+        MalfunctionComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        ANGULAR_MATERIAL_MODULES,
+    ],
+    providers: [HttpClient],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
