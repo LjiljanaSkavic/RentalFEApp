@@ -6,8 +6,8 @@ import { MatTableDataSource } from "@angular/material/table";
 import { EMPTY, Subscription, switchMap } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationModalComponent } from "../confirmation-modal/confirmation-modal.component";
-import { UserModalComponent } from "./user-modal/user-modal.component";
 import { MatSlideToggleChange } from "@angular/material/slide-toggle";
+import { ProfileDetailsModalComponent } from "../profile-details/profile-details-modal.component";
 
 @Component({
   selector: 'app-users',
@@ -76,8 +76,9 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   onEditClick(user: AppUser): void {
-    this.dialog.open(UserModalComponent, {
+    this.dialog.open(ProfileDetailsModalComponent, {
       data: {
+        origin: "Users",
         user: user
       },
       hasBackdrop: true,
@@ -139,7 +140,11 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   onAddNewUserClick(): void {
-    this.dialog.open(UserModalComponent, {
+    this.dialog.open(ProfileDetailsModalComponent, {
+      data: {
+        origin: "Users",
+        user: null
+      },
       hasBackdrop: true,
       backdropClass: 'rentals-app-backdrop'
     }).afterClosed().subscribe(result => {

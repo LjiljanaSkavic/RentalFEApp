@@ -34,7 +34,6 @@ import { ConfirmationModalComponent } from "./component/confirmation-modal/confi
 import { MatSelectModule } from "@angular/material/select";
 import { VehicleModalComponent } from './component/vehicles/vehicle-modal/vehicle-modal.component';
 import { VehicleTypePipe } from "./pipes/vehicle-category.pipe";
-import { UserModalComponent } from './component/users/user-modal/user-modal.component';
 import { UserTypePipe } from "./pipes/user-type.pipe";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MalfunctionModalComponent } from './component/malfunction-modal/malfunction-modal.component';
@@ -82,7 +81,6 @@ export const ANGULAR_MATERIAL_MODULES = [
     VehicleModalComponent,
     VehicleTypePipe,
     UserTypePipe,
-    UserModalComponent,
     MalfunctionModalComponent,
     CarouselComponent,
     RentalComponent,

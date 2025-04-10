@@ -83,6 +83,9 @@ export class AppComponent implements OnInit, OnDestroy {
   onProfileDetailsClick(): void {
     this.collapsed = true;
     this.dialog.open(ProfileDetailsModalComponent, {
+        data: {
+          origin: "Profile details"
+        },
         hasBackdrop: true,
         backdropClass: 'rentals-app-backdrop'
       }
