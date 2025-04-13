@@ -27,7 +27,7 @@ export class VehiclesComponent implements OnInit, OnDestroy {
     selectedCategory = '';
     dataSource = new MatTableDataSource<Vehicle>(this.vehicles);
     categories = ['CAR', 'E_BIKE', 'E_SCOOTER'];
-    displayedColumns: string[] = ['id', 'vehicleCode', 'purchasePrice', 'model', 'status', 'edit', 'delete', 'add-malfunction'];
+    displayedColumns: string[] = ['id', 'model', 'purchasePrice', 'status', 'edit', 'delete', 'add-malfunction'];
     @ViewChild(MatPaginator) paginator: MatPaginator = {} as MatPaginator;
     @ViewChild('fileInput') fileInput: any;
 

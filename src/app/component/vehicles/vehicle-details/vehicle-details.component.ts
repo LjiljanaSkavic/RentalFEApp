@@ -77,7 +77,7 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
         if (!this.vehicleDetails) return;
 
         this.vehicleForm = new FormGroup({
-            vehicleCode: new FormControl(this.vehicleDetails.vehicleCode, Validators.required),
+            uuid: new FormControl(this.vehicleDetails.uuid),
             model: new FormControl(this.vehicleDetails.model, Validators.required),
             purchasePrice: new FormControl(this.vehicleDetails.purchasePrice, [Validators.required, Validators.min(0)]),
             status: new FormControl(this.vehicleDetails.status, Validators.required),
