@@ -135,7 +135,23 @@ export class UserModalComponent implements OnInit, OnDestroy {
         }
 
         if (this.data.origin === 'Profile details') {
-
+            const profileDetails: AppUser = {
+                id: this.user!.id,
+                phone: this.profileForm.get('phone')?.value,
+                email: this.profileForm.get('email')?.value,
+                firstName: this.profileForm.get('firstName')?.value,
+                profilePicture: this.user!.profilePicture,
+                lastName: this.profileForm.get('lastName')?.value,
+                username: this.user!.username,
+                password: this.user!.password,
+                role: this.profileForm.get('role')?.value,
+                deleted: false
+            }
+            if (this.user?.profilePicture?.name !== this.selectedFileName) {
+                this.uploadNewPictureAndEditProfileDetails(profileDetails);
+            } else {
+                this.editProfileDetails({...profileDetails, profilePictureId: this.user?.id});
+            }
         }
         if (this.data.origin === 'Users' && this.isEditMode) {
             const editedUser: AppUser = {
@@ -196,36 +212,50 @@ export class UserModalComponent implements OnInit, OnDestroy {
     }
 
     editProfileDetails(user: AppUserRequest): void {
-        this._userService.editUser(user).subscribe(res => {
-            this._userStoreService.setUserAsLoggedIn(res);
-            this.user = this._userStoreService.getLoggedInUser();
+        this._userService.editUser(user.id, user).subscribe(res => {
+            this.updateUserStore(res);
             this._snackBar.open("Profile details successfully updated.", "OK", snackBarConfig);
+            this._dialogRef.close(true);
         });
+    }
+
+    updateUserStore(user: AppUser): void {
+        this._userStoreService.setUserAsLoggedIn(user);
+        this.user = this._userStoreService.getLoggedInUser();
     }
 
     editUser(user: AppUserRequest): void {
-        this._userService.editUser(user).subscribe(res => {
-            this._userStoreService.setUserAsLoggedIn(res);
-            this.user = this._userStoreService.getLoggedInUser();
+        this._userService.editUser(user.id, user).subscribe((user: AppUser) => {
             this._snackBar.open("User successfully updated.", "OK", snackBarConfig);
-        });
-    }
-
-    createUser(user: EmployeeRequest): void {
-        this._userService.createUser(user).subscribe(res => {
-            this._snackBar.open("User successfully created.", "OK", snackBarConfig);
+            this._dialogRef.close(user);
         });
     }
 
     uploadNewPictureAndEditUser(user: AppUser): void {
         this._fileService.uploadFile(this.selectedFile).pipe(
             switchMap((response: any) => {
-                return this._userService.editUser({...user, profilePictureId: response.id});
+                return this._userService.editUser(user.id, {...user, profilePictureId: response.id});
             })
         ).subscribe(
-            res => {
-                this._userStoreService.setUserAsLoggedIn(res);
-                this.user = this._userStoreService.getLoggedInUser();
+            (user: AppUser) => {
+                this._snackBar.open("User successfully updated.", "OK", snackBarConfig);
+                this._dialogRef.close(user);
+            },
+            error => {
+                console.error('Error uploading file or saving user data:', error);
+            }
+        );
+    }
+
+    uploadNewPictureAndEditProfileDetails(user: AppUser): void {
+        this._fileService.uploadFile(this.selectedFile).pipe(
+            switchMap((response: any) => {
+                return this._userService.editUser(user.id, {...user, profilePictureId: response.id});
+            })
+        ).subscribe(
+            (user: AppUser) => {
+                this._dialogRef.close(user);
+                this._snackBar.open("Profile details successfully updated.", "OK", snackBarConfig);
             },
             error => {
                 console.error('Error uploading file or saving user data:', error);
@@ -239,8 +269,8 @@ export class UserModalComponent implements OnInit, OnDestroy {
                 return this._userService.createUser({...employeeRequest, profilePicture: response});
             })
         ).subscribe(
-            res => {
-                console.log(res)
+            (user: AppUser) => {
+                this._dialogRef.close(user);
             },
             error => {
                 console.error('Error uploading file or saving user data:', error);

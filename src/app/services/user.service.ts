@@ -53,8 +53,8 @@ export class UserService {
         return this._httpClient.post(changePasswordUrl, changePasswordData)
     }
 
-    editUser(user: AppUserRequest): Observable<AppUser> {
-        const editUserUrl = `${this.baseUrl}/${user.id}`;
+    editUser(userId: number, user: AppUserRequest): Observable<AppUser> {
+        const editUserUrl = `${this.baseUrl}/${userId}`;
         return this._httpClient.put<AppUser>(editUserUrl, user);
     }
 

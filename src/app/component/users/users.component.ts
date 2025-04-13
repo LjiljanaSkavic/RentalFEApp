@@ -8,6 +8,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationModalComponent } from "../confirmation-modal/confirmation-modal.component";
 import { MatSlideToggleChange } from "@angular/material/slide-toggle";
 import { UserModalComponent } from "../user-modal/user-modal.component";
+import { UserStoreService } from "../../services/user-store.service";
 
 @Component({
     selector: 'app-users',
@@ -22,6 +23,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     totalUsers = 0;
     types = ['CLIENT', 'EMPLOYEE'];
     selectedType = '';
+    userId: number = 0;
     subscriptions = new Subscription();
 
     displayedColumnsClient: string[] = ['id', 'username', 'firstName', 'lastName', 'email', 'phone', 'block'];
@@ -32,10 +34,15 @@ export class UsersComponent implements OnInit, OnDestroy {
     @ViewChild(MatPaginator) paginator: MatPaginator = {} as MatPaginator;
 
     constructor(private _userService: UserService,
+                private _userStoreService: UserStoreService,
                 public dialog: MatDialog) {
     }
 
     ngOnInit(): void {
+        if (this._userStoreService.getIsLoggedIn()) {
+            this.userId = this._userStoreService.getLoggedInUser()?.id ?? 0;
+        }
+
         this.selectedType = this.types[1];
         this.updateDisplayedColumns();
         this.loadUsers();
@@ -45,7 +52,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         this.isLoading = true;
         this.subscriptions.add(this._userService.getUsers(this.pageIndex, this.pageSize, this.selectedType).subscribe(res => {
             if (this.selectedType === 'EMPLOYEE') {
-                this.users = res.data.filter(user => !user.deleted);
+                this.users = res.data.filter(user => !user.deleted && user.id != this.userId);
             } else {
                 this.users = res.data;
             }
@@ -82,7 +89,7 @@ export class UsersComponent implements OnInit, OnDestroy {
                 user: user
             },
             hasBackdrop: true,
-            backdropClass: 'rentals-app-backdrop'
+            backdropClass: 'rentals-app-backdsrop'
         }).afterClosed().subscribe(result => {
             if (result) {
                 const userIndex = this.users.findIndex(u => u.id === result.id);
