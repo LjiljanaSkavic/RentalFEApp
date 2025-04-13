@@ -54,9 +54,7 @@
                     number.
                 </mat-error>
             </mat-form-field>
-        </div>
 
-        <div class="form-wrapper__group">
             <mat-form-field class="form-field">
                 <mat-label>Status</mat-label>
                 <mat-select formControlName="status">
@@ -66,7 +64,9 @@
                 </mat-select>
                 <mat-error *ngIf="vehicleForm.get('status')?.hasError('required')">Status is required.</mat-error>
             </mat-form-field>
+        </div>
 
+        <div class="form-wrapper__group">
             <mat-form-field class="form-field">
                 <mat-label>Manufacturer</mat-label>
                 <mat-select formControlName="manufacturerId">

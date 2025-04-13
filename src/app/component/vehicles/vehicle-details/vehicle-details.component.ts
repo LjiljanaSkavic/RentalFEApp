@@ -59,18 +59,10 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
                 })
             ).subscribe(res => {
                 this.vehicleDetails = res;
-                this.getManufacturer(this.vehicleDetails.manufacturerId);
                 this.getImageUrl(res.image.id);
                 this.buildForm();
             })
         );
-    }
-
-    getManufacturer(manufacturerId: number): void {
-        this.subscription.add(
-            this._manufacturerService.getById(manufacturerId).subscribe(res => {
-                this.manufacturer = res;
-            }));
     }
 
     buildForm(): void {
@@ -81,7 +73,7 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
             model: new FormControl(this.vehicleDetails.model, Validators.required),
             purchasePrice: new FormControl(this.vehicleDetails.purchasePrice, [Validators.required, Validators.min(0)]),
             status: new FormControl(this.vehicleDetails.status, Validators.required),
-            manufacturer: new FormControl(this.vehicleDetails.manufacturerId, Validators.required),
+            manufacturer: new FormControl(this.vehicleDetails.manufacturer.id, Validators.required),
         });
 
         if (this.vehicleType === 'CAR') {

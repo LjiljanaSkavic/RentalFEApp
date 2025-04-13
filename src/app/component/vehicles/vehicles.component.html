@@ -49,6 +49,15 @@
             <mat-cell *matCellDef="let vehicle"> {{ vehicle.id }} </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="manufacturer">
+            <mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header> Manufacturer
+            </mat-header-cell>
+            <mat-cell *matCellDef="let vehicle"> {{ vehicle.manufacturer.name }} ({{ vehicle.manufacturer.country}})
+            </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="model">
             <mat-header-cell
                 *matHeaderCellDef

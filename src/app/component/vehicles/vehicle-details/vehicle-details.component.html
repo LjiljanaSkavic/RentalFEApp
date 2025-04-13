@@ -1,7 +1,7 @@
 <div
     *ngIf="!isLoading"
     class="vehicle-details">
-    <h3>{{ manufacturer.name }}</h3>
+    <h3>{{ vehicleDetails.manufacturer.name }} ({{vehicleDetails.manufacturer.country}})</h3>
     <h2>{{vehicleDetails.model}}</h2>
 
     <div class="button-wrapper">

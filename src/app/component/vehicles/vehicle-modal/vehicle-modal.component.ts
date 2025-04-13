@@ -65,7 +65,7 @@ export class VehicleModalComponent implements OnInit, OnDestroy {
                 model: new FormControl(this.data.vehicle.model, Validators.required),
                 purchasePrice: new FormControl(this.data.vehicle.purchasePrice, [Validators.required, Validators.min(0)]),
                 status: new FormControl(this.data.vehicle.status, Validators.required),
-                manufacturerId: new FormControl(this.data.vehicle.manufacturerId, Validators.required),
+                manufacturerId: new FormControl(this.data.vehicle.manufacturer.id, Validators.required),
                 imageName: new FormControl(this.data.vehicle.image.name || null)
             });
 
@@ -87,7 +87,7 @@ export class VehicleModalComponent implements OnInit, OnDestroy {
                 model: new FormControl(null, Validators.required),
                 purchasePrice: new FormControl(null, [Validators.required, Validators.min(0)]),
                 status: new FormControl(null, Validators.required),
-                manufacturerId: new FormControl(this.data.vehicle.manufacturerId, Validators.required),
+                manufacturerId: new FormControl(null, Validators.required),
             });
 
             if (this.data.vehicleType === 'CAR') {

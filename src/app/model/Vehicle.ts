@@ -1,5 +1,6 @@
 import { RentalAppFile } from "./RentalAppFile";
 import { VehicleDetails } from "./VehicleDetails";
+import { Manufacturer } from "./Manufacturer";
 
 export interface Vehicle {
     id: number;
@@ -7,7 +8,7 @@ export interface Vehicle {
     purchasePrice: number;
     model: string;
     status: VehicleStatus;
-    manufacturerId: number;
+    manufacturer: Manufacturer;
     image: RentalAppFile;
 }
 
