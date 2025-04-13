@@ -1,117 +1,117 @@
 <div
-  *ngIf="!isLoading"
-  class="vehicle-details">
-  <h3>{{ vehicleDetails.vehicleCode }}</h3>
-  <h2>{{vehicleDetails.model}}</h2>
+    *ngIf="!isLoading"
+    class="vehicle-details">
+    <h3>{{ manufacturer.name }}</h3>
+    <h2>{{vehicleDetails.model}}</h2>
 
-  <div class="button-wrapper">
-    <button
-      (click)="onEditVehicleClick()"
-      class="button-primary"
-      mat-button
-      matTooltip="Edit vehicle">
-      <mat-icon>edit</mat-icon>
-    </button>
-    <button
-      (click)="onDeleteVehicleClick()"
-      class="button-danger"
-      mat-button
-      matTooltip="Delete vehicle">
-      <mat-icon>delete</mat-icon>
-    </button>
-  </div>
-
-  <app-carousel
-    *ngIf="vehicleImageUrls.length > 0"
-    [images]="vehicleImageUrls">
-  </app-carousel>
-
-  <div class="form-wrapper">
-    <form
-      [formGroup]="vehicleForm"
-      class="rental-form">
-      <mat-form-field class="form-field">
-        <mat-label>Purchase price</mat-label>
-        <input
-          formControlName="purchasePrice"
-          matInput>
-      </mat-form-field>
-
-      <mat-form-field class="form-field">
-        <mat-label>Status</mat-label>
-        <input
-          formControlName="status"
-          matInput>
-      </mat-form-field>
-
-      <mat-form-field class="form-field">
-        <mat-label>Manufacturer</mat-label>
-        <input
-          formControlName="manufacturer"
-          matInput>
-      </mat-form-field>
-
-      <ng-container *ngIf="vehicleType === 'CAR'">
-        <mat-form-field class="form-field">
-          <mat-label>Acquisition Date</mat-label>
-          <input
-            formControlName="acquisitionDate"
-            matInput
-            type="date">
-        </mat-form-field>
-
-        <mat-form-field class="form-field">
-          <mat-label>Description</mat-label>
-          <textarea
-            formControlName="description"
-            matInput></textarea>
-        </mat-form-field>
-      </ng-container>
-
-      <ng-container *ngIf="vehicleType === 'E_BIKE'">
-        <mat-form-field class="form-field">
-          <mat-label>Range Per Charge (km)</mat-label>
-          <input
-            formControlName="rangePerCharge"
-            matInput>
-        </mat-form-field>
-      </ng-container>
-
-      <ng-container *ngIf="vehicleType === 'E_SCOOTER'">
-        <mat-form-field class="form-field">
-          <mat-label>Max Speed (km/h)</mat-label>
-          <input
-            formControlName="maxSpeed"
-            matInput>
-        </mat-form-field>
-      </ng-container>
-    </form>
-  </div>
-
-  <div class="malfunction-wrapper">
-    <h2>Malfunctions</h2>
     <div class="button-wrapper">
-      <button
-        (click)="onAddMalfunction()"
-        class="button-primary"
-        mat-button
-        matTooltip="Add malfunction">
-        <mat-icon>add</mat-icon>
-      </button>
+        <button
+            (click)="onEditVehicleClick()"
+            class="button-primary"
+            mat-button
+            matTooltip="Edit vehicle">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button
+            (click)="onDeleteVehicleClick()"
+            class="button-danger"
+            mat-button
+            matTooltip="Delete vehicle">
+            <mat-icon>delete</mat-icon>
+        </button>
     </div>
-    <ng-container *ngIf="vehicleDetails.malfunctions.length > 0">
-      <div *ngFor="let malfunction of vehicleDetails.malfunctions">
-        <app-malfunction
-          (deleteMalfunctionEmitter)="onDeleteMalfunction($event)"
-          [malfunction]="malfunction"></app-malfunction>
-      </div>
-    </ng-container>
-  </div>
 
-  <ng-container *ngIf="vehicleDetails.rentals.length > 0">
-    <h2>Rentals</h2>
-    <div *ngFor="let rental of vehicleDetails.rentals">
-      <app-rental [rental]="rental"></app-rental>
+    <app-carousel
+        *ngIf="vehicleImageUrls.length > 0"
+        [images]="vehicleImageUrls">
+    </app-carousel>
+
+    <div class="form-wrapper">
+        <form
+            [formGroup]="vehicleForm"
+            class="rental-form">
+            <mat-form-field class="form-field">
+                <mat-label>Purchase price</mat-label>
+                <input
+                    formControlName="purchasePrice"
+                    matInput>
+            </mat-form-field>
+
+            <mat-form-field class="form-field">
+                <mat-label>Status</mat-label>
+                <input
+                    formControlName="status"
+                    matInput>
+            </mat-form-field>
+
+            <mat-form-field class="form-field">
+                <mat-label>Manufacturer</mat-label>
+                <input
+                    formControlName="manufacturer"
+                    matInput>
+            </mat-form-field>
+
+            <ng-container *ngIf="vehicleType === 'CAR'">
+                <mat-form-field class="form-field">
+                    <mat-label>Acquisition Date</mat-label>
+                    <input
+                        formControlName="acquisitionDate"
+                        matInput
+                        type="date">
+                </mat-form-field>
+
+                <mat-form-field class="form-field">
+                    <mat-label>Description</mat-label>
+                    <textarea
+                        formControlName="description"
+                        matInput></textarea>
+                </mat-form-field>
+            </ng-container>
+
+            <ng-container *ngIf="vehicleType === 'E_BIKE'">
+                <mat-form-field class="form-field">
+                    <mat-label>Range Per Charge (km)</mat-label>
+                    <input
+                        formControlName="rangePerCharge"
+                        matInput>
+                </mat-form-field>
+            </ng-container>
+
+            <ng-container *ngIf="vehicleType === 'E_SCOOTER'">
+                <mat-form-field class="form-field">
+                    <mat-label>Max Speed (km/h)</mat-label>
+                    <input
+                        formControlName="maxSpeed"
+                        matInput>
+                </mat-form-field>
+            </ng-container>
+        </form>
     </div>
-  </ng-container>
+
+    <div class="malfunction-wrapper">
+        <h2>Malfunctions</h2>
+        <div class="button-wrapper">
+            <button
+                (click)="onAddMalfunction()"
+                class="button-primary"
+                mat-button
+                matTooltip="Add malfunction">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <ng-container *ngIf="vehicleDetails.malfunctions.length > 0">
+            <div *ngFor="let malfunction of vehicleDetails.malfunctions">
+                <app-malfunction
+                    (deleteMalfunctionEmitter)="onDeleteMalfunction($event)"
+                    [malfunction]="malfunction"></app-malfunction>
+            </div>
+        </ng-container>
+    </div>
+
+    <ng-container *ngIf="vehicleDetails.rentals.length > 0">
+        <h2>Rentals</h2>
+        <div *ngFor="let rental of vehicleDetails.rentals">
+            <app-rental [rental]="rental"></app-rental>
+        </div>
+    </ng-container>
 </div>
