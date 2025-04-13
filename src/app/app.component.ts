@@ -36,7 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     @HostListener('document:click', ['$event'])
     onDocumentClick(event: Event): void {
-        const clickedToggleProfile = this._elRef.nativeElement.querySelector('.user-modal').contains(event.target);
+        const clickedToggleProfile = this._elRef.nativeElement.querySelector('.profile-details').contains(event.target);
         const clickedInsideProfileCard = this._elRef.nativeElement.querySelector('.quick-profile-view-card').contains(event.target);
 
         if (!clickedToggleProfile && !clickedInsideProfileCard && !this.collapsed) {

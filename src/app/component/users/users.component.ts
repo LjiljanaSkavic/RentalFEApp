@@ -36,7 +36,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.selectedType = this.types[0];
+        this.selectedType = this.types[1];
         this.updateDisplayedColumns();
         this.loadUsers();
     }

@@ -1,11 +1,11 @@
-export interface AppUserRequest {
+export interface EmployeeRequest {
     id: number;
     username: string;
-    password: string;
     firstName: string;
     lastName: string;
+    password: string;
     email: string;
     phone: string;
+    role: string
     profilePictureId: number;
-    role: string;
 }

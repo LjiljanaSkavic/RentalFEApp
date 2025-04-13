@@ -5,10 +5,13 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { UserStoreService } from "../../services/user-store.service";
 import { UserService } from "../../services/user.service";
 import { FileService } from "../../services/files.service";
-import { AppUser } from "../../model/AppUser";
+import { AppUser, EmployeeRequest } from "../../model/AppUser";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { snackBarConfig } from "../../shared/constants";
 import { AppUserRequest } from "../../model/AppUserRequest";
+import * as sha512 from "js-sha512";
+import { MatSlideToggleChange } from "@angular/material/slide-toggle";
+import { RentalAppFile } from "../../model/RentalAppFile";
 
 export interface UserModalData {
     origin: 'Profile details' | 'Users';
@@ -29,6 +32,8 @@ export class UserModalComponent implements OnInit, OnDestroy {
     fileUrlOriginal: string | null = null;
     isEditMode = false;
     subscriptions = new Subscription();
+    resetPassword = false;
+    roles = ['Admin', 'Operator', 'Manager'];
 
     constructor(private _userStoreService: UserStoreService,
                 private _fileService: FileService,
@@ -66,6 +71,7 @@ export class UserModalComponent implements OnInit, OnDestroy {
         } else if (this.data.origin === 'Users' && this.data.user === null) {
             this.user = {} as AppUser;
             this.isEditMode = false;
+            this.buildProfileForm(this.user);
         } else {
             //TODO: Handle error
         }
@@ -96,6 +102,7 @@ export class UserModalComponent implements OnInit, OnDestroy {
                 firstName: new FormControl(user.firstName, Validators.required),
                 lastName: new FormControl(user.lastName, Validators.required),
                 username: new FormControl(user.username, Validators.required),
+                password: new FormControl(user.password, Validators.required),
                 role: new FormControl(user.role, Validators.required),
                 email: new FormControl(user.email, Validators.required),
                 phone: new FormControl(user.phone, Validators.required),
@@ -105,8 +112,8 @@ export class UserModalComponent implements OnInit, OnDestroy {
             this.profileForm = new FormGroup({
                 firstName: new FormControl(null, Validators.required),
                 lastName: new FormControl(null, Validators.required),
-                username: new FormControl(null, Validators.required),
-                role: new FormControl(null, Validators.required),
+                username: new FormControl('', Validators.required),
+                role: new FormControl('', Validators.required),
                 email: new FormControl(null, Validators.required),
                 phone: new FormControl(null, Validators.required),
                 profilePicture: new FormControl(null)
@@ -114,30 +121,60 @@ export class UserModalComponent implements OnInit, OnDestroy {
         }
     }
 
-    onDiscardProfileChanges(): void {
+    onDiscardChanges(): void {
         this.buildProfileForm(this.user ?? {} as AppUser);
         this.fileUrl = this.fileUrlOriginal;
         this._dialogRef.close();
     }
 
-    onSaveProfileChanges(): void {
-        const editedUser: AppUser = {
-            id: this.user!.id,
-            phone: this.profileForm.get('phone')?.value,
-            email: this.profileForm.get('email')?.value,
-            firstName: this.profileForm.get('firstName')?.value,
-            profilePicture: this.user!.profilePicture,
-            lastName: this.profileForm.get('lastName')?.value,
-            username: this.user!.username,
-            role: this.profileForm.get('role')?.value,
-            deleted: false
+    onSaveChanges(): void {
+        let password = '';
+        let doResetPassword = this.data.origin === 'Users' && this.resetPassword;
+        if (doResetPassword) {
+            password = this.getPasswordHash(`${this.user!.username}_${this.profileForm.get('role')?.value}`);
         }
-        if (this.user?.profilePicture?.name !== this.selectedFileName) {
-            this.uploadNewPictureAndSaveUser(editedUser);
-        } else {
-            this.saveUser({...editedUser, imageId: this.user?.id});
+
+        if (this.data.origin === 'Profile details') {
+
+        }
+        if (this.data.origin === 'Users' && this.isEditMode) {
+            const editedUser: AppUser = {
+                id: this.user!.id,
+                phone: this.profileForm.get('phone')?.value,
+                email: this.profileForm.get('email')?.value,
+                firstName: this.profileForm.get('firstName')?.value,
+                profilePicture: this.user!.profilePicture,
+                lastName: this.profileForm.get('lastName')?.value,
+                username: this.user!.username,
+                password: doResetPassword ? password : this.user!.password,
+                role: this.profileForm.get('role')?.value,
+                deleted: false
+            }
+            if (this.user?.profilePicture?.name !== this.selectedFileName) {
+                this.uploadNewPictureAndEditUser(editedUser);
+            } else {
+                this.editUser({...editedUser, profilePictureId: this.user?.id});
+            }
+        } else if (this.data.origin === 'Users' && !this.isEditMode) {
+            const newUser: EmployeeRequest = {
+                phone: this.profileForm.get('phone')?.value,
+                email: this.profileForm.get('email')?.value,
+                firstName: this.profileForm.get('firstName')?.value,
+                profilePicture: {} as RentalAppFile,
+                lastName: this.profileForm.get('lastName')?.value,
+                username: this.profileForm.get('username')?.value,
+                password: this.getPasswordHash(`${this.user!.username}_${this.profileForm.get('role')?.value}`),
+                role: this.profileForm.get('role')?.value,
+                deleted: false
+            }
+            //TODO: Check what if picture is not selected
+            this.uploadNewPictureAndCreateUser(newUser);
         }
         this._dialogRef.close();
+    }
+
+    getPasswordHash(password: string): string {
+        return sha512.sha512(password);
     }
 
     onFileSelected(event: any): void {
@@ -158,18 +195,32 @@ export class UserModalComponent implements OnInit, OnDestroy {
         reader.readAsDataURL(file);
     }
 
-    saveUser(user: AppUserRequest): void {
+    editProfileDetails(user: AppUserRequest): void {
         this._userService.editUser(user).subscribe(res => {
             this._userStoreService.setUserAsLoggedIn(res);
             this.user = this._userStoreService.getLoggedInUser();
-            this._snackBar.open("User details successfully updated.", "OK", snackBarConfig);
+            this._snackBar.open("Profile details successfully updated.", "OK", snackBarConfig);
         });
     }
 
-    uploadNewPictureAndSaveUser(user: AppUser): void {
+    editUser(user: AppUserRequest): void {
+        this._userService.editUser(user).subscribe(res => {
+            this._userStoreService.setUserAsLoggedIn(res);
+            this.user = this._userStoreService.getLoggedInUser();
+            this._snackBar.open("User successfully updated.", "OK", snackBarConfig);
+        });
+    }
+
+    createUser(user: EmployeeRequest): void {
+        this._userService.createUser(user).subscribe(res => {
+            this._snackBar.open("User successfully created.", "OK", snackBarConfig);
+        });
+    }
+
+    uploadNewPictureAndEditUser(user: AppUser): void {
         this._fileService.uploadFile(this.selectedFile).pipe(
             switchMap((response: any) => {
-                return this._userService.editUser({...user, imageId: response.id});
+                return this._userService.editUser({...user, profilePictureId: response.id});
             })
         ).subscribe(
             res => {
@@ -180,6 +231,25 @@ export class UserModalComponent implements OnInit, OnDestroy {
                 console.error('Error uploading file or saving user data:', error);
             }
         );
+    }
+
+    uploadNewPictureAndCreateUser(employeeRequest: EmployeeRequest): void {
+        this._fileService.uploadFile(this.selectedFile).pipe(
+            switchMap((response: any) => {
+                return this._userService.createUser({...employeeRequest, profilePicture: response});
+            })
+        ).subscribe(
+            res => {
+                console.log(res)
+            },
+            error => {
+                console.error('Error uploading file or saving user data:', error);
+            }
+        );
+    }
+
+    onDoPasswordChange(event: MatSlideToggleChange): void {
+        this.resetPassword = event.checked;
     }
 
     ngOnDestroy(): void {

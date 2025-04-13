@@ -41,10 +41,10 @@
                     class="form-field">
                     <mat-label>Username</mat-label>
                     <input
-                        [disabled]="true"
+                        [disabled]="data.origin === 'Profile details' ||
+                                    (data.origin === 'Users' && isEditMode)"
                         formControlName="username"
-                        matInput
-                        readonly>
+                        matInput>
                 </mat-form-field>
                 <mat-form-field class="form-field">
                     <mat-label>First name</mat-label>
@@ -58,14 +58,32 @@
                         formControlName="lastName"
                         matInput>
                 </mat-form-field>
+                <p
+                    *ngIf="data.origin === 'Users' && isEditMode">
+                    <mat-slide-toggle
+                        (change)="onDoPasswordChange($event)"
+                        [(ngModel)]="resetPassword">Set password to the format username_role
+                    </mat-slide-toggle>
+                </p>
+                <p
+                    *ngIf="data.origin === 'Users' && !isEditMode"
+                    class="password-style">
+                    Note: Password will be automatically generated in the following format: username_role
+                </p>
             </div>
             <div class="profile-form profile-form--row">
                 <mat-form-field class="form-field">
                     <mat-label>Role</mat-label>
-                    <input
-                        formControlName="role"
-                        matInput>
+                    <mat-select
+                        formControlName="role">
+                        <mat-option
+                            *ngFor="let role of roles"
+                            [value]="role">
+                            {{ role }}
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
+
                 <mat-form-field class="form-field">
                     <mat-label>Email</mat-label>
                     <input
@@ -85,12 +103,12 @@
     <div
         class="button-wrapper">
         <button
-            (click)="onDiscardProfileChanges()"
+            (click)="onDiscardChanges()"
             class="button-discard"
             mat-button>Discard
         </button>
         <button
-            (click)="onSaveProfileChanges()"
+            (click)="onSaveChanges()"
             [disabled]="profileForm.invalid"
             class="button-save"
             mat-button>Save
