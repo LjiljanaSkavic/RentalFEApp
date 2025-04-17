@@ -23,7 +23,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     totalUsers = 0;
     types = ['CLIENT', 'EMPLOYEE'];
     selectedType = '';
-    userId: number = 0;
+    user: AppUser = {} as AppUser;
     subscriptions = new Subscription();
 
     displayedColumnsClient: string[] = ['id', 'username', 'firstName', 'lastName', 'email', 'phone', 'block'];
@@ -40,10 +40,14 @@ export class UsersComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         if (this._userStoreService.getIsLoggedIn()) {
-            this.userId = this._userStoreService.getLoggedInUser()?.id ?? 0;
+            this.user = this._userStoreService.getLoggedInUser() ?? {} as AppUser;
         }
 
-        this.selectedType = this.types[1];
+        if (this.user.role === 'Operator') {
+            this.types = this.types.filter(type => type === 'CLIENT')
+        }
+
+        this.selectedType = this.types[0];
         this.updateDisplayedColumns();
         this.loadUsers();
     }
@@ -52,7 +56,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         this.isLoading = true;
         this.subscriptions.add(this._userService.getUsers(this.pageIndex, this.pageSize, this.selectedType).subscribe(res => {
             if (this.selectedType === 'EMPLOYEE') {
-                this.users = res.data.filter(user => !user.deleted && user.id != this.userId);
+                this.users = res.data.filter(user => !user.deleted && user.id != this.user.id);
             } else {
                 this.users = res.data;
             }

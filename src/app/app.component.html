@@ -43,7 +43,6 @@
             </button>
             <button
                 (click)="drawer.close()"
-                *ngIf="user?.role === 'Admin'"
                 class="mat-list-item"
                 routerLink="/users"
                 routerLinkActive="active">Users
