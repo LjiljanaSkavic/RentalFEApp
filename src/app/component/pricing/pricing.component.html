@@ -1,0 +1,33 @@
+<div class="page-container">
+    <mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> ID</mat-header-cell>
+            <mat-cell *matCellDef="let pricing"> {{ pricing.id }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="vehicleType">
+            <mat-header-cell *matHeaderCellDef> Vehicle Type</mat-header-cell>
+            <mat-cell *matCellDef="let pricing"> {{ pricing.vehicleType | vehicleType }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="pricePerDay">
+            <mat-header-cell *matHeaderCellDef> Price/Day</mat-header-cell>
+            <mat-cell *matCellDef="let pricing"> {{ pricing.pricePerDay | currency:'EUR' }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+            <mat-header-cell *matHeaderCellDef> Edit</mat-header-cell>
+            <mat-cell *matCellDef="let pricing">
+                <button
+                    (click)="onEditClick(pricing)"
+                    class="button-primary"
+                >
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>
+

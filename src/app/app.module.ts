@@ -42,6 +42,8 @@ import { MatNativeDateModule } from "@angular/material/core";
 import { CarouselComponent } from "./component/carousel/carousel.component";
 import { RentalComponent } from './component/rentals/rental/rental.component';
 import { MalfunctionComponent } from './component/malfunction-modal/malfunction/malfunction.component';
+import { PricingComponent } from './component/pricing/pricing.component';
+import { PricingModalComponent } from './component/pricing-modal/pricing-modal.component';
 
 export const ANGULAR_MATERIAL_MODULES = [
     MatCardModule,
@@ -84,7 +86,9 @@ export const ANGULAR_MATERIAL_MODULES = [
         MalfunctionModalComponent,
         CarouselComponent,
         RentalComponent,
-        MalfunctionComponent
+        MalfunctionComponent,
+        PricingComponent,
+        PricingModalComponent
     ],
     imports: [
         BrowserModule,

@@ -58,6 +58,13 @@
                 (click)="drawer.close()"
                 *ngIf="user?.role === 'Manager'"
                 class="mat-list-item"
+                routerLink="/pricing"
+                routerLinkActive="active">Pricing
+            </button>
+            <button
+                (click)="drawer.close()"
+                *ngIf="user?.role === 'Manager'"
+                class="mat-list-item"
                 routerLink="/statistics"
                 routerLinkActive="active">Statistics
             </button>

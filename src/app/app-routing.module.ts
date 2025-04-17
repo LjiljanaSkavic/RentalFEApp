@@ -7,6 +7,7 @@ import { StatisticsComponent } from "./component/statistics/statistics.component
 import { VehicleDetailsComponent } from "./component/vehicles/vehicle-details/vehicle-details.component";
 import { UserModalComponent } from "./component/user-modal/user-modal.component";
 import { RentalsComponent } from "./component/rentals/rentals.component";
+import { PricingComponent } from "./component/pricing/pricing.component";
 
 const routes: Routes = [
     {
@@ -41,6 +42,10 @@ const routes: Routes = [
     {
         path: "user-modal-modal/:id",
         component: UserModalComponent
+    },
+    {
+        path: "pricing",
+        component: PricingComponent
     },
 ];
 
