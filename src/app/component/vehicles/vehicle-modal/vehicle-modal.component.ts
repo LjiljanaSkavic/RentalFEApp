@@ -10,6 +10,7 @@ import { isObjectEmpty } from "../../../shared/utils/is-empty";
 import { ManufacturersService } from "../../../services/manufacturers.service";
 import { Manufacturer } from "../../../model/Manufacturer";
 import { FileService } from "../../../services/files.service";
+import { v4 as uuidv4 } from 'uuid';
 
 export interface VehicleModalData {
     vehicle: Car | ElectricBike | ElectricScooter;
@@ -83,7 +84,7 @@ export class VehicleModalComponent implements OnInit, OnDestroy {
             }
         } else {
             this.vehicleForm = new FormGroup({
-                vehicleCode: new FormControl(null, Validators.required),
+                vehicleCode: new FormControl(uuidv4(), Validators.required),
                 model: new FormControl(null, Validators.required),
                 purchasePrice: new FormControl(null, [Validators.required, Validators.min(0)]),
                 status: new FormControl(null, Validators.required),

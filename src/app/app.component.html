@@ -1,97 +1,97 @@
 <mat-toolbar class="toolbar-container">
-  <div class="toolbar-container-left">
-    <button
-      (click)="drawer.toggle()"
-      mat-icon-button>
-      <mat-icon>menu</mat-icon>
-    </button>
-    <mat-label
-      (click)="onRentalAppClick()"
-      class="rental-app-label">FleetFlow
-      <mat-icon>car_rental</mat-icon>
-    </mat-label>
-  </div>
+    <div class="toolbar-container-left">
+        <button
+            (click)="drawer.toggle()"
+            mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-label
+            (click)="onRentalAppClick()"
+            class="rental-app-label">FleetFlow
+            <mat-icon>car_rental</mat-icon>
+        </mat-label>
+    </div>
 
-  <div class="toolbar-container-right">
-    <button
-      (click)="onToggleAccountMenuClick()"
-      class="profile-details"
-      mat-icon-button>
-      <mat-icon>account_circle</mat-icon>
-    </button>
-  </div>
+    <div class="toolbar-container-right">
+        <button
+            (click)="onToggleAccountMenuClick()"
+            class="profile-details"
+            mat-icon-button>
+            <mat-icon>account_circle</mat-icon>
+        </button>
+    </div>
 </mat-toolbar>
 
 <mat-drawer-container class="container">
-  <mat-drawer
-    #drawer
-    class="sidenav">
-    <mat-nav-list>
-      <button
-        (click)="drawer.close()"
-        *ngIf="user?.role === 'Admin' || user?.role === 'Manager'"
-        class="mat-list-item"
-        routerLink="/vehicles"
-        routerLinkActive="active">Vehicles
-      </button>
-      <button
-        (click)="drawer.close()"
-        *ngIf="user?.role === 'Admin' || user?.role === 'Manager'"
-        class="mat-list-item"
-        routerLink="/manufacturers"
-        routerLinkActive="active">Manufacturers
-      </button>
-      <button
-        (click)="drawer.close()"
-        *ngIf="user?.role === 'Admin'"
-        class="mat-list-item"
-        routerLink="/users"
-        routerLinkActive="active">Users
-      </button>
-      <button
-        (click)="drawer.close()"
-        *ngIf="user?.role === 'Operator' || user?.role === 'Manager'"
-        class="mat-list-item"
-        routerLink="/rentals"
-        routerLinkActive="active">Rentals
-      </button>
-      <button
-        (click)="drawer.close()"
-        *ngIf="user?.role === 'Manager'"
-        class="mat-list-item"
-        routerLink="/statistics"
-        routerLinkActive="active">Statistics
-      </button>
-    </mat-nav-list>
-  </mat-drawer>
+    <mat-drawer
+        #drawer
+        class="sidenav">
+        <mat-nav-list>
+            <button
+                (click)="drawer.close()"
+                *ngIf="user?.role === 'Admin' || user?.role === 'Manager'"
+                class="mat-list-item"
+                routerLink="/vehicles"
+                routerLinkActive="active">Vehicles
+            </button>
+            <button
+                (click)="drawer.close()"
+                *ngIf="user?.role === 'Admin' || user?.role === 'Manager'"
+                class="mat-list-item"
+                routerLink="/manufacturers"
+                routerLinkActive="active">Manufacturers
+            </button>
+            <button
+                (click)="drawer.close()"
+                *ngIf="user?.role === 'Admin'"
+                class="mat-list-item"
+                routerLink="/users"
+                routerLinkActive="active">Users
+            </button>
+            <button
+                (click)="drawer.close()"
+                *ngIf="user?.role === 'Operator' || user?.role === 'Manager'"
+                class="mat-list-item"
+                routerLink="/rentals"
+                routerLinkActive="active">Rentals
+            </button>
+            <button
+                (click)="drawer.close()"
+                *ngIf="user?.role === 'Manager'"
+                class="mat-list-item"
+                routerLink="/statistics"
+                routerLinkActive="active">Statistics
+            </button>
+        </mat-nav-list>
+    </mat-drawer>
 
-  <mat-drawer-content>
-    <div
-      [@collapse]="collapsed"
-      class="quick-profile-view-card">
-      <button
-        (click)="onProfileDetailsClick()"
-        class="icon-label-wrapper"
-        mat-button>
-        <mat-icon>settings</mat-icon>
-        Profile details
-      </button>
+    <mat-drawer-content>
+        <div
+            [@collapse]="collapsed"
+            class="quick-profile-view-card">
+            <button
+                (click)="onProfileDetailsClick()"
+                class="icon-label-wrapper"
+                mat-button>
+                <mat-icon>settings</mat-icon>
+                Profile details
+            </button>
 
-      <button
-        (click)="onChangePasswordClick()"
-        class="icon-label-wrapper"
-        mat-button>
-        <mat-icon>password</mat-icon>
-        Manage password
-      </button>
-      <button
-        (click)="onLogOutClick()"
-        class="icon-label-wrapper"
-        mat-button>
-        <mat-icon>logout</mat-icon>
-        Log out
-      </button>
-    </div>
-    <router-outlet></router-outlet>
-  </mat-drawer-content>
+            <button
+                (click)="onChangePasswordClick()"
+                class="icon-label-wrapper"
+                mat-button>
+                <mat-icon>password</mat-icon>
+                Manage password
+            </button>
+            <button
+                (click)="onLogOutClick()"
+                class="icon-label-wrapper"
+                mat-button>
+                <mat-icon>logout</mat-icon>
+                Log out
+            </button>
+        </div>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
 </mat-drawer-container>
