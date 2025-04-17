@@ -1,1 +1,57 @@
-<p>pricing-modal works!</p>
+<div class="pricing-container">
+    <div
+        class="pricing-container__header"
+        mat-dialog-title>
+        Edit Pricing
+    </div>
+
+    <form
+        [formGroup]="pricingForm"
+        class="form-wrapper">
+        <div class="form-wrapper__group">
+            <mat-form-field
+                appearance="fill"
+                class="form-field">
+                <mat-label>Vehicle Type</mat-label>
+                <input
+                    [value]="data.pricing.vehicleType | vehicleType"
+                    disabled
+                    matInput>
+            </mat-form-field>
+
+            <mat-form-field
+                appearance="fill"
+                class="form-field">
+                <mat-label>Price Per Day</mat-label>
+                <input
+                    formControlName="pricePerDay"
+                    matInput
+                    placeholder="Enter price per day"
+                    type="number">
+                <mat-error *ngIf="pricingForm.get('pricePerDay')?.hasError('required')">
+                    Price is required.
+                </mat-error>
+                <mat-error *ngIf="pricingForm.get('pricePerDay')?.hasError('min')">
+                    Price must be at least 0.
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+
+    <div
+        class="button-wrapper"
+        mat-dialog-actions>
+        <button
+            [mat-dialog-close]="null"
+            class="button-discard"
+            mat-button>Discard
+        </button>
+        <button
+            (click)="onDialogClose()"
+            [disabled]="pricingForm.invalid"
+            class="button-save"
+            mat-button>
+            Save
+        </button>
+    </div>
+</div>

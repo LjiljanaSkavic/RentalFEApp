@@ -1,0 +1,30 @@
+@import "src/app/shared/colors";
+@import "src/app/shared/classes";
+
+.pricing-container {
+  max-height: 500px;
+  overflow: hidden;
+
+  &__header {
+    background-color: $color-blue-1;
+    color: $color-white;
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+.form-wrapper {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    gap: 8px;
+  }
+}
