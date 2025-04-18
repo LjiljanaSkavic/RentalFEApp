@@ -1,130 +1,119 @@
 <div class="page-container">
-    <div class="header-container">
-        <div class="form-column form-column__wide">
-            <mat-form-field>
-                <mat-label>Choose category</mat-label>
-                <mat-select
-                    (ngModelChange)="onCategoryChange($event)"
-                    [(ngModel)]="selectedCategory">
-                    <mat-option
-                        *ngFor="let category of categories"
-                        [value]="category">
-                        {{ category | vehicleType }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-        <button
-            (click)="onAddNewVehicleClick()"
-            [matTooltip]="'Add Vehicle'"
-            class="button-primary"
-            mat-button
-        >
-            <mat-icon>add</mat-icon>
-        </button>
-        <button
-            (click)="onUploadVehicleClick()"
-            [matTooltip]="'Upload Vehicle'"
-            class="button-primary"
-            mat-button
-        >
-            <mat-icon>upload</mat-icon>
-        </button>
-        <input
-            #fileInput
-            (change)="onFileSelected($event)"
-            accept=".csv"
-            style="display:none"
-            type="file">
+  <div class="header-container">
+    <div class="form-column form-column__wide">
+      <mat-form-field>
+        <mat-label>Choose category</mat-label>
+        <mat-select
+          (ngModelChange)="onCategoryChange($event)"
+          [(ngModel)]="selectedCategory">
+          <mat-option
+            *ngFor="let category of categories"
+            [value]="category">
+            {{ category | vehicleType }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
-    <mat-table
-        [dataSource]="dataSource"
-        matSort>
-        <ng-container matColumnDef="id">
-            <mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header> ID
-            </mat-header-cell>
-            <mat-cell *matCellDef="let vehicle"> {{ vehicle.id }} </mat-cell>
-        </ng-container>
 
-        <ng-container matColumnDef="manufacturer">
-            <mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header> Manufacturer
-            </mat-header-cell>
-            <mat-cell *matCellDef="let vehicle"> {{ vehicle.manufacturer.name }} ({{ vehicle.manufacturer.country}})
-            </mat-cell>
-        </ng-container>
+    <button
+      (click)="onAddNewVehicleClick()"
+      [matTooltip]="'Add Vehicle'"
+      class="button-primary"
+      mat-button
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+    <button
+      (click)="onUploadVehicleClick()"
+      [matTooltip]="'Upload Vehicle'"
+      class="button-primary"
+      mat-button
+    >
+      <mat-icon>upload</mat-icon>
+    </button>
+    <input
+      #fileInput
+      (change)="onFileSelected($event)"
+      accept=".csv"
+      style="display:none"
+      type="file">
+  </div>
+  <mat-table
+    [dataSource]="dataSource"
+    matSort>
+    <ng-container matColumnDef="id">
+      <mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header> ID
+      </mat-header-cell>
+      <mat-cell *matCellDef="let vehicle"> {{ vehicle.id }} </mat-cell>
+    </ng-container>
 
-        <ng-container matColumnDef="model">
-            <mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header> Model
-            </mat-header-cell>
-            <mat-cell *matCellDef="let vehicle"> {{ vehicle.model }} </mat-cell>
-        </ng-container>
+    <ng-container matColumnDef="manufacturer">
+      <mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header> Manufacturer
+      </mat-header-cell>
+      <mat-cell *matCellDef="let vehicle"> {{ vehicle.manufacturer.name }} ({{ vehicle.manufacturer.country}})
+      </mat-cell>
+    </ng-container>
 
-        <ng-container matColumnDef="purchasePrice">
-            <mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header> Purchase Price
-            </mat-header-cell>
-            <mat-cell *matCellDef="let vehicle"> {{ vehicle.purchasePrice | currency }} </mat-cell>
-        </ng-container>
+    <ng-container matColumnDef="model">
+      <mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header> Model
+      </mat-header-cell>
+      <mat-cell *matCellDef="let vehicle"> {{ vehicle.model }} </mat-cell>
+    </ng-container>
 
-        <ng-container matColumnDef="status">
-            <mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header> Status
-            </mat-header-cell>
-            <mat-cell *matCellDef="let vehicle"> {{ vehicle.status }} </mat-cell>
-        </ng-container>
+    <ng-container matColumnDef="purchasePrice">
+      <mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header> Purchase Price
+      </mat-header-cell>
+      <mat-cell *matCellDef="let vehicle"> {{ vehicle.purchasePrice | currency }} </mat-cell>
+    </ng-container>
 
-        <ng-container matColumnDef="edit">
-            <mat-header-cell *matHeaderCellDef> Edit</mat-header-cell>
-            <mat-cell *matCellDef="let vehicle; let index = index">
-                <button
-                    (click)="onEditClick(vehicle); $event.stopPropagation()"
-                    class="button-primary">
-                    <mat-icon>edit</mat-icon>
-                </button>
-            </mat-cell>
-        </ng-container>
+    <ng-container matColumnDef="status">
+      <mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header> Status
+      </mat-header-cell>
+      <mat-cell *matCellDef="let vehicle"> {{ vehicle.status }} </mat-cell>
+    </ng-container>
 
-        <ng-container matColumnDef="add-malfunction">
-            <mat-header-cell *matHeaderCellDef>Add Malfunction</mat-header-cell>
-            <mat-cell *matCellDef="let vehicle; let index = index">
-                <button
-                    (click)="onAddMalfunctionClick(vehicle); $event.stopPropagation()"
-                    class="button-primary">
-                    <mat-icon>add</mat-icon>
-                </button>
-            </mat-cell>
-        </ng-container>
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef> Edit</mat-header-cell>
+      <mat-cell *matCellDef="let vehicle; let index = index">
+        <button
+          (click)="onEditClick(vehicle); $event.stopPropagation()"
+          class="button-primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
 
-        <ng-container matColumnDef="delete">
-            <mat-header-cell *matHeaderCellDef> Delete</mat-header-cell>
-            <mat-cell *matCellDef="let vehicle; let index = index">
-                <button
-                    (click)="onDeleteClick(vehicle); $event.stopPropagation()"
-                    class="button-danger">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </mat-cell>
-        </ng-container>
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef> Delete</mat-header-cell>
+      <mat-cell *matCellDef="let vehicle; let index = index">
+        <button
+          (click)="onDeleteClick(vehicle); $event.stopPropagation()"
+          class="button-danger">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row
-            (click)="onRowClick(row)"
-            *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      (click)="onRowClick(row)"
+      *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
 </div>
 
 <mat-paginator
-    (page)="onPageChange($event)"
-    [length]="totalVehicles"
-    [pageSize]="pageSize"
-    class="mat-paginator"
+  (page)="onPageChange($event)"
+  [length]="totalVehicles"
+  [pageSize]="pageSize"
+  class="mat-paginator"
 ></mat-paginator>

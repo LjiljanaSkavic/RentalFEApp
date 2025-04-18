@@ -8,6 +8,8 @@ import { VehicleDetailsComponent } from "./component/vehicles/vehicle-details/ve
 import { UserModalComponent } from "./component/user-modal/user-modal.component";
 import { RentalsComponent } from "./component/rentals/rentals.component";
 import { PricingComponent } from "./component/pricing/pricing.component";
+import { MalfunctionsComponent } from "./component/malfunctions/malfunctions.component";
+import { VehicleMapComponent } from "./component/vehicle-map/vehicle-map.component";
 
 const routes: Routes = [
     {
@@ -46,6 +48,14 @@ const routes: Routes = [
     {
         path: "pricing",
         component: PricingComponent
+    },
+    {
+        path: "malfunctions",
+        component: MalfunctionsComponent
+    },
+    {
+        path: "vehicle-map",
+        component: VehicleMapComponent
     },
 ];
 

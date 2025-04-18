@@ -49,6 +49,20 @@
             </button>
             <button
                 (click)="drawer.close()"
+                *ngIf="user?.role === 'Operator'"
+                class="mat-list-item"
+                routerLink="/malfunctions"
+                routerLinkActive="active">Malfunctions
+            </button>
+            <button
+                (click)="drawer.close()"
+                *ngIf="user?.role === 'Operator'"
+                class="mat-list-item"
+                routerLink="/vehicle-map"
+                routerLinkActive="active">Vehicle Map
+            </button>
+            <button
+                (click)="drawer.close()"
                 *ngIf="user?.role === 'Operator' || user?.role === 'Manager'"
                 class="mat-list-item"
                 routerLink="/rentals"

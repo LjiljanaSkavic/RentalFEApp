@@ -44,6 +44,8 @@ import { RentalComponent } from './component/rentals/rental/rental.component';
 import { MalfunctionComponent } from './component/malfunction-modal/malfunction/malfunction.component';
 import { PricingComponent } from './component/pricing/pricing.component';
 import { PricingModalComponent } from './component/pricing-modal/pricing-modal.component';
+import { MalfunctionsComponent } from './component/malfunctions/malfunctions.component';
+import { VehicleMapComponent } from './component/vehicle-map/vehicle-map.component';
 
 export const ANGULAR_MATERIAL_MODULES = [
     MatCardModule,
@@ -88,7 +90,9 @@ export const ANGULAR_MATERIAL_MODULES = [
         RentalComponent,
         MalfunctionComponent,
         PricingComponent,
-        PricingModalComponent
+        PricingModalComponent,
+        MalfunctionsComponent,
+        VehicleMapComponent
     ],
     imports: [
         BrowserModule,

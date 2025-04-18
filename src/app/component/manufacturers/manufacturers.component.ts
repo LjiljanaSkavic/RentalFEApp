@@ -40,6 +40,7 @@ export class ManufacturersComponent implements OnInit, OnDestroy {
       this.manufacturers = res.data;
       this.totalManufacturers = res.totalElements;
       this.dataSource.data = this.manufacturers;
+      this.dataSource.paginator = this.paginator;
       this.isLoading = false;
     }));
   }

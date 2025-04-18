@@ -5,8 +5,11 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MalfunctionRequest } from "../../model/Malfunction";
 import { MalfunctionService } from "../../services/malfunction-service";
 
+export type MalfunctionModalOrigin = 'Vehicle details' | 'Malfunctions'
+
 export interface MalfunctionModalData {
   vehicleId: number;
+  origin: MalfunctionModalOrigin
 }
 
 @Component({
