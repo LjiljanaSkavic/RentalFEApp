@@ -38,7 +38,7 @@
           Invalid time format. Use hh:mm:ss.
         </mat-error>
       </mat-form-field>
-      
+
       <mat-form-field class="form-field">
         <mat-label>Description</mat-label>
         <textarea
@@ -48,6 +48,19 @@
         <mat-error *ngIf="malfunctionForm.get('description')?.hasError('required')">
           Description is required.
         </mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+        *ngIf="data.origin === 'Malfunctions'"
+        class="form-field">
+        <mat-label>Choose Vehicle</mat-label>
+        <mat-select formControlName="vehicleId">
+          <mat-option
+            *ngFor="let vehicle of vehicles"
+            [value]="vehicle.id">
+            {{ vehicle.manufacturerName }}/{{ vehicle.model }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
   </form>

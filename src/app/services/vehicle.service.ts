@@ -5,6 +5,7 @@ import { SearchResult } from "../model/SearchResult";
 import { CarDetails, ElectricBikeDetails, ElectricScooterDetails, Vehicle } from "../model/Vehicle";
 import { VehicleRequest } from "../model/VehicleRequest";
 import { Manufacturer } from "../model/Manufacturer";
+import { VehicleShort } from "../model/VehicleShort";
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,10 @@ export class VehicleService {
 
   deleteById(id: number): Observable<boolean> {
     return this._httpClient.delete<boolean>(`${this.baseUrl}/${id}`);
+  }
+
+  getAllShort(): Observable<VehicleShort[]> {
+    return this._httpClient.get<VehicleShort[]>(`${this.baseUrl}/short`);
   }
 
   update(vehicleRequest: VehicleRequest, vehicleId: number): Observable<any> {
