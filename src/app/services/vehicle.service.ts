@@ -46,4 +46,8 @@ export class VehicleService {
   getById(id: number): Observable<CarDetails | ElectricBikeDetails | ElectricScooterDetails> {
     return this._httpClient.get<CarDetails | ElectricBikeDetails | ElectricScooterDetails>(`${this.baseUrl}/${id}`);
   }
+
+  import(formData: FormData): Observable<string> {
+    return this._httpClient.post(`${this.baseUrl}/import/csv`, formData, {responseType: 'text'});
+  }
 }

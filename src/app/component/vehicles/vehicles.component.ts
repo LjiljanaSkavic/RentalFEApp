@@ -9,6 +9,7 @@ import { ConfirmationModalComponent } from "../confirmation-modal/confirmation-m
 import { VehicleModalComponent } from "./vehicle-modal/vehicle-modal.component";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { snackBarConfig } from "../../shared/constants";
 
 @Component({
   selector: 'app-vehicles',
@@ -152,40 +153,20 @@ export class VehiclesComponent implements OnInit, OnDestroy {
         return;
       }
 
-      this.readCSVFile(file);
+      const formData = new FormData();
+      formData.append('file', file, file.name);
+
+      this._vehicleService.import(formData).subscribe(() => {
+          this._snackBar.open("Vehicle successfully imported.", "OK", snackBarConfig);
+          input.value = '';
+          this.loadVehicles();
+        },
+        () => {
+          input.value = '';
+          this._snackBar.open("Some error has occurred during import.", "OK", snackBarConfig);
+        })
+
     }
-  }
-
-  readCSVFile(file: File): void {
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      const csvData = reader.result as string;
-
-      // Manually parse the CSV content
-      const lines = csvData.split('\n');
-      const headers = lines[0].split(',');  // Assuming the first line is the header
-      const rows = [];
-
-      for (let i = 1; i < lines.length; i++) {
-        const row = lines[i].split(',');
-        if (row.length === headers.length) {
-          const rowData = headers.reduce((acc: any, header: string, index: number) => {
-            acc[header.trim()] = row[index].trim();
-            return acc;
-          }, {});
-          rows.push(rowData);
-        }
-      }
-      //TODO: Add code when BE is finished
-      this._snackBar.open('Vehicle uploaded successfully!', 'Close', {duration: 3000});
-    };
-
-    reader.onerror = () => {
-      this._snackBar.open('Error reading file.', 'Close', {duration: 3000});
-    };
-
-    reader.readAsText(file);
   }
 
   ngOnDestroy(): void {
