@@ -4,7 +4,7 @@ import { EMPTY, Subscription, switchMap } from "rxjs";
 import { VehicleService } from "../../../services/vehicle.service";
 import { ActivatedRoute } from "@angular/router";
 import { FileService } from "../../../services/files.service";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
 import { MalfunctionService } from "../../../services/malfunction-service";
 import { ConfirmationModalComponent } from "../../confirmation-modal/confirmation-modal.component";
 import { MatDialog } from "@angular/material/dialog";
@@ -67,11 +67,11 @@ export class VehicleDetailsComponent implements OnInit, OnDestroy {
     if (!this.vehicleDetails) return;
 
     this.vehicleForm = new FormGroup({
-      uuid: new FormControl(this.vehicleDetails.uuid),
-      model: new FormControl(this.vehicleDetails.model, Validators.required),
-      purchasePrice: new FormControl(this.vehicleDetails.purchasePrice, [Validators.required, Validators.min(0)]),
-      status: new FormControl(this.vehicleDetails.status, Validators.required),
-      manufacturer: new FormControl(this.vehicleDetails.manufacturer.id, Validators.required),
+      code: new FormControl(this.vehicleDetails.code),
+      model: new FormControl(this.vehicleDetails.model),
+      purchasePrice: new FormControl(this.vehicleDetails.purchasePrice),
+      status: new FormControl(this.vehicleDetails.status),
+      manufacturer: new FormControl(this.vehicleDetails.manufacturer.name),
     });
 
     if (this.vehicleType === 'CAR') {

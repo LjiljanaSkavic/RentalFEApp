@@ -1,146 +1,155 @@
 <div class="vehicle-container">
-    <div
-        class="vehicle-container__header"
-        mat-dialog-title>
-        {{ this.isEditMode ? 'Edit Vehicle' : 'Add Vehicle' }}
+  <div
+    class="vehicle-container__header"
+    mat-dialog-title>
+    {{ this.isEditMode ? 'Edit Vehicle' : 'Add Vehicle' }}
+  </div>
+
+  <form
+    [formGroup]="vehicleForm"
+    class="form-wrapper">
+    <div class="form-wrapper__group">
+      <div
+        *ngIf="fileUrl"
+        class="avatar-wrapper">
+        <img
+          [src]="fileUrl"
+          alt="File"
+          class="avatar-image">
+      </div>
+      <div
+        class="upload-button">
+        <label
+          class="file-label"
+          for="fileInput">
+          <span>Upload new picture</span>
+          <input
+            (change)="onFileSelected($event)"
+            class="file-input"
+            id="fileInput"
+            type="file">
+        </label>
+      </div>
+    </div>
+    <div class="form-wrapper__group">
+      <mat-form-field class="form-field">
+        <mat-label>Code</mat-label>
+        <input
+          formControlName="code"
+          matInput
+          placeholder="Enter vehicle code">
+        <mat-error *ngIf="vehicleForm.get('code')?.hasError('required')">Code is required.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Model</mat-label>
+        <input
+          formControlName="model"
+          matInput
+          placeholder="Enter vehicle model">
+        <mat-error *ngIf="vehicleForm.get('model')?.hasError('required')">Model is required.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Purchase Price</mat-label>
+        <input
+          formControlName="purchasePrice"
+          matInput
+          placeholder="Enter purchase price"
+          type="number">
+        <mat-error *ngIf="vehicleForm.get('purchasePrice')?.hasError('required')">Purchase Price is required.
+        </mat-error>
+        <mat-error *ngIf="vehicleForm.get('purchasePrice')?.hasError('min')">Purchase Price must be a positive
+          number.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="Rented">Rented</mat-option>
+          <mat-option value="Available">Available</mat-option>
+          <mat-option value="Broken">Broken</mat-option>
+        </mat-select>
+        <mat-error *ngIf="vehicleForm.get('status')?.hasError('required')">Status is required.</mat-error>
+      </mat-form-field>
     </div>
 
-    <form
-        [formGroup]="vehicleForm"
-        class="form-wrapper">
-        <div class="form-wrapper__group">
-            <div
-                *ngIf="fileUrl"
-                class="avatar-wrapper">
-                <img
-                    [src]="fileUrl"
-                    alt="File"
-                    class="avatar-image">
-            </div>
-            <div
-                class="upload-button">
-                <label
-                    class="file-label"
-                    for="fileInput">
-                    <span>Upload new picture</span>
-                    <input
-                        (change)="onFileSelected($event)"
-                        class="file-input"
-                        id="fileInput"
-                        type="file">
-                </label>
-            </div>
-        </div>
-        <div class="form-wrapper__group">
-            <mat-form-field class="form-field">
-                <mat-label>Model</mat-label>
-                <input
-                    formControlName="model"
-                    matInput
-                    placeholder="Enter vehicle model">
-                <mat-error *ngIf="vehicleForm.get('model')?.hasError('required')">Model is required.</mat-error>
-            </mat-form-field>
+    <div class="form-wrapper__group">
+      <mat-form-field class="form-field">
+        <mat-label>Manufacturer</mat-label>
+        <mat-select formControlName="manufacturerId">
+          <mat-option
+            *ngFor="let manufacturer of manufactures"
+            [value]="manufacturer.id">
+            {{ manufacturer.name }} ({{ manufacturer.country }})
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="vehicleForm.get('manufacturerId')?.hasError('required')">Manufacturer is required.
+        </mat-error>
+      </mat-form-field>
 
-            <mat-form-field class="form-field">
-                <mat-label>Purchase Price</mat-label>
-                <input
-                    formControlName="purchasePrice"
-                    matInput
-                    placeholder="Enter purchase price"
-                    type="number">
-                <mat-error *ngIf="vehicleForm.get('purchasePrice')?.hasError('required')">Purchase Price is required.
-                </mat-error>
-                <mat-error *ngIf="vehicleForm.get('purchasePrice')?.hasError('min')">Purchase Price must be a positive
-                    number.
-                </mat-error>
-            </mat-form-field>
+      <ng-container *ngIf="data.vehicleType === 'CAR'">
+        <mat-form-field class="form-field">
+          <mat-label>Acquisition Date</mat-label>
+          <input
+            formControlName="acquisitionDate"
+            matInput
+            type="date">
+          <mat-error *ngIf="vehicleForm.get('acquisitionDate')?.hasError('required')">Acquisition Date is
+            required.
+          </mat-error>
+        </mat-form-field>
 
-            <mat-form-field class="form-field">
-                <mat-label>Status</mat-label>
-                <mat-select formControlName="status">
-                    <mat-option value="Rented">Rented</mat-option>
-                    <mat-option value="Available">Available</mat-option>
-                    <mat-option value="Broken">Broken</mat-option>
-                </mat-select>
-                <mat-error *ngIf="vehicleForm.get('status')?.hasError('required')">Status is required.</mat-error>
-            </mat-form-field>
-        </div>
+        <mat-form-field class="form-field">
+          <mat-label>Description</mat-label>
+          <textarea
+            formControlName="description"
+            matInput
+            placeholder="Enter description"></textarea>
+          <mat-error *ngIf="vehicleForm.get('description')?.hasError('required')">Description is required.
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
 
-        <div class="form-wrapper__group">
-            <mat-form-field class="form-field">
-                <mat-label>Manufacturer</mat-label>
-                <mat-select formControlName="manufacturerId">
-                    <mat-option
-                        *ngFor="let manufacturer of manufactures"
-                        [value]="manufacturer.id">
-                        {{ manufacturer.name }} ({{ manufacturer.country }})
-                    </mat-option>
-                </mat-select>
-                <mat-error *ngIf="vehicleForm.get('manufacturerId')?.hasError('required')">Manufacturer is required.
-                </mat-error>
-            </mat-form-field>
+      <ng-container *ngIf="data.vehicleType === 'E_BIKE'">
+        <mat-form-field class="form-field">
+          <mat-label>Range Per Charge (km)</mat-label>
+          <input
+            formControlName="rangePerCharge"
+            matInput
+            type="number">
+          <mat-error *ngIf="vehicleForm.get('rangePerCharge')?.hasError('required')">Range Per Charge is
+            required.
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
 
-            <ng-container *ngIf="data.vehicleType === 'CAR'">
-                <mat-form-field class="form-field">
-                    <mat-label>Acquisition Date</mat-label>
-                    <input
-                        formControlName="acquisitionDate"
-                        matInput
-                        type="date">
-                    <mat-error *ngIf="vehicleForm.get('acquisitionDate')?.hasError('required')">Acquisition Date is
-                        required.
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="form-field">
-                    <mat-label>Description</mat-label>
-                    <textarea
-                        formControlName="description"
-                        matInput
-                        placeholder="Enter description"></textarea>
-                    <mat-error *ngIf="vehicleForm.get('description')?.hasError('required')">Description is required.
-                    </mat-error>
-                </mat-form-field>
-            </ng-container>
-
-            <ng-container *ngIf="data.vehicleType === 'E_BIKE'">
-                <mat-form-field class="form-field">
-                    <mat-label>Range Per Charge (km)</mat-label>
-                    <input
-                        formControlName="rangePerCharge"
-                        matInput
-                        type="number">
-                    <mat-error *ngIf="vehicleForm.get('rangePerCharge')?.hasError('required')">Range Per Charge is
-                        required.
-                    </mat-error>
-                </mat-form-field>
-            </ng-container>
-
-            <ng-container *ngIf="data.vehicleType === 'E_SCOOTER'">
-                <mat-form-field class="form-field">
-                    <mat-label>Max Speed (km/h)</mat-label>
-                    <input
-                        formControlName="maxSpeed"
-                        matInput
-                        type="number">
-                    <mat-error *ngIf="vehicleForm.get('maxSpeed')?.hasError('required')">Max Speed is required.
-                    </mat-error>
-                </mat-form-field>
-            </ng-container>
-        </div>
-    </form>
-    <div
-        class="button-wrapper"
-        mat-dialog-actions>
-        <button
-            [mat-dialog-close]="null"
-            class="button-discard"
-            mat-button>Discard
-        </button>
-        <button
-            (click)="onDialogClose()"
-            class="button-save"
-            mat-button>Save
-        </button>
+      <ng-container *ngIf="data.vehicleType === 'E_SCOOTER'">
+        <mat-form-field class="form-field">
+          <mat-label>Max Speed (km/h)</mat-label>
+          <input
+            formControlName="maxSpeed"
+            matInput
+            type="number">
+          <mat-error *ngIf="vehicleForm.get('maxSpeed')?.hasError('required')">Max Speed is required.
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
     </div>
+  </form>
+  <div
+    class="button-wrapper"
+    mat-dialog-actions>
+    <button
+      [mat-dialog-close]="null"
+      class="button-discard"
+      mat-button>Discard
+    </button>
+    <button
+      (click)="onDialogClose()"
+      class="button-save"
+      mat-button>Save
+    </button>
+  </div>
 </div>
